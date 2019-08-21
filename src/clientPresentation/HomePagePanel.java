@@ -2,44 +2,17 @@ package clientPresentation;
 
 import static javax.swing.LayoutStyle.ComponentPlacement.RELATED;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-
 import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 
-public class HomePagePanel extends JPanel {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	private static final String BACKGROUND_PATH = "resources/background.png";
-	
-	private Image background = null;
-
+public class HomePagePanel extends ClientPanel {
 	public HomePagePanel() {
+		super();
 		createButtons();
-		try {
-			this.background = new ImageIcon(BACKGROUND_PATH).getImage();
-			setSizes(this.background);
-		} catch (Exception e) {
-			System.out.println("[INFO]: Load background in home page failed");
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		if (background != null)
-			g.drawImage(background, 0, 0, null);
 	}
 	
 	private void createButtons() {
@@ -56,6 +29,8 @@ public class HomePagePanel extends JPanel {
 				
 		// set button functions
 		queryButton.addActionListener((event) -> ClientGUIControl.getInstance().queryWord());
+		addButton.addActionListener((event) -> ClientGUIControl.getInstance().addWord());
+		removeButton.addActionListener((event) -> ClientGUIControl.getInstance().removeWord());
 		quitButton.addActionListener((event) -> System.exit(0));
 
 		createLayout(queryButton, addButton, removeButton, quitButton);
@@ -90,12 +65,4 @@ public class HomePagePanel extends JPanel {
 
         gl.linkSize(SwingConstants.HORIZONTAL, arg);
     }
-	
-	private void setSizes(Image img) {
-		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-	    setPreferredSize(size);
-	    setMinimumSize(size);
-	    setMaximumSize(size);
-	    setSize(size);
-	}
 }

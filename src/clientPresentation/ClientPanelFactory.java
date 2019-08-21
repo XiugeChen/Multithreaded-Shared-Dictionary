@@ -4,10 +4,8 @@ import javax.swing.JPanel;
 
 public class ClientPanelFactory {
 	private static ClientPanelFactory instance = null;
-	private JPanel homePagePanel;
 	
 	private ClientPanelFactory() {
-		homePagePanel = new HomePagePanel();
 	}
 	
 	public static ClientPanelFactory getInstance() {
@@ -19,6 +17,18 @@ public class ClientPanelFactory {
 	
 	// getter and setter
 	public JPanel getHomePagePanel() {
-		return this.homePagePanel;
+		return new HomePagePanel();
 	}
+	
+	public JPanel getQueryPagePanel() {
+		return new QueryPagePanel();
+	}
+	
+	public JPanel getAddPagePanel() {
+		return new AddPagePanel();
+	}
+	
+	public JPanel getRemovePagePanel() {
+		return new RemovePagePanel();
+	} 
 }

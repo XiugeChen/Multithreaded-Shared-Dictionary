@@ -9,15 +9,9 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
 public class ClientFrame extends JFrame {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private static final int WINDOW_WIDTH = 730;
 	private static final int WINDOW_HEIGHT = 390;
 	
@@ -28,6 +22,31 @@ public class ClientFrame extends JFrame {
 
 	public ClientFrame() {
 		initUI();
+	}
+	
+	public void display(String page) {
+		getContentPane().removeAll();
+		getContentPane().invalidate();
+		
+		switch (page.toLowerCase()) {
+			case "add":
+				getContentPane().add(ClientPanelFactory.getInstance().getAddPagePanel());
+				setTitle("Unimelb COMP90015 Dictionary - Add");
+				break;
+			case "remove":
+				getContentPane().add(ClientPanelFactory.getInstance().getRemovePagePanel());
+				setTitle("Unimelb COMP90015 Dictionary - Remove");
+				break;
+			case "query":
+				getContentPane().add(ClientPanelFactory.getInstance().getQueryPagePanel());
+				setTitle("Unimelb COMP90015 Dictionary - Query");
+				break;
+			default:
+				getContentPane().add(ClientPanelFactory.getInstance().getHomePagePanel());
+				setTitle("Unimelb COMP90015 Dictionary - Home");
+		}
+		
+		getContentPane().revalidate();
 	}
 	
 	private void initUI() {
@@ -41,15 +60,10 @@ public class ClientFrame extends JFrame {
         setIconImage(dicIcon.getImage());
         
         // window settings
-		setTitle("My Dictionary");
+		setTitle("Unimelb COMP90015 Dictionary - Home");
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
-	
-	public void displayQueryPage() {
-		getContentPane().removeAll();
-		getContentPane().add(new JPanel());
 	}
 	
 	private void createMenuBar() {

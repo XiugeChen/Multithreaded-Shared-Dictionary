@@ -29,7 +29,19 @@ public class ClientGUIControl {
         });
 	}
 	
+	public void backToHome() {
+		clientFrame.display("home");
+	}
+	
 	public void queryWord() {
-		clientFrame.displayQueryPage();
+		clientFrame.display("query");
+	}
+	
+	public void addWord() {
+		clientFrame.display("add");
+	}
+	
+	public void removeWord() {
+		clientFrame.display("remove");
 	}
 }
