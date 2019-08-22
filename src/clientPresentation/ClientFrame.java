@@ -15,10 +15,10 @@ public class ClientFrame extends JFrame {
 	private static final int WINDOW_WIDTH = 730;
 	private static final int WINDOW_HEIGHT = 390;
 	
-	private static final String DICT_ICON_PATH = "resources/dictionaryIcon.png";
-	private static final String NEW_ICON_PATH = "resources/addIcon.png";
-	private static final String HOME_ICON_PATH = "resources/homeIcon.png";
-	private static final String EXIT_ICON_PATH = "resources/exitIcon.png";
+	private static final String DICT_ICON_PATH = "resources/images/dictionaryIcon.png";
+	private static final String NEW_ICON_PATH = "resources/images/addIcon.png";
+	private static final String HOME_ICON_PATH = "resources/images/homeIcon.png";
+	private static final String EXIT_ICON_PATH = "resources/images/exitIcon.png";
 
 	public ClientFrame() {
 		initUI();
@@ -87,7 +87,8 @@ public class ClientFrame extends JFrame {
     		exitMenuItem = new JMenuItem("Exit", new ImageIcon(EXIT_ICON_PATH));
     		subjectMenuItem = new JMenuItem("Website", new ImageIcon(HOME_ICON_PATH));
         } catch (Exception e) {
-        	System.out.println("[INFO]: Load menu item images failed");
+        	System.err.println("[INFO]: Load menu item images failed");
+        	System.err.println(e.getMessage());
         	e.printStackTrace();
         } finally {
         	if (newMenuItem == null)

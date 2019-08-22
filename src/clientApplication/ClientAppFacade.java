@@ -2,8 +2,10 @@ package clientApplication;
 
 public class ClientAppFacade {
 	private static ClientAppFacade instance;
+	private ClientApplication clientApp;
 	
 	private ClientAppFacade() {
+		clientApp = new ClientApplication();
 	}
 	
 	public static ClientAppFacade getInstance() {
@@ -32,5 +34,12 @@ public class ClientAppFacade {
 			return "[Warning] Remove word can not be empty";
 		
 		return "Remove: " + word;
+	}
+	
+	public boolean rcvCmdArgs(String[] args) {
+		if (clientApp.setCmd(args))
+			return true;
+		
+		return false;
 	}
 }

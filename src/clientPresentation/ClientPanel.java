@@ -8,7 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public abstract class ClientPanel extends JPanel {
-	private static final String BACKGROUND_PATH = "resources/background.png";
+	private static final String BACKGROUND_PATH = "resources/images/background.png";
 	
 	private Image background = null;
 	
@@ -17,7 +17,8 @@ public abstract class ClientPanel extends JPanel {
 			this.background = new ImageIcon(BACKGROUND_PATH).getImage();
 			setSizes(this.background);
 		} catch (Exception e) {
-			System.out.println("[INFO]: Load background in home page failed");
+			System.err.println("[INFO]: Load background in home page failed");
+			System.err.println(e.getMessage());
 			e.printStackTrace();
 		}
 	}
