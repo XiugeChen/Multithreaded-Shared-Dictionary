@@ -13,15 +13,24 @@ import javax.net.ServerSocketFactory;
 
 import org.kohsuke.args4j.CmdLineParser;
 
+import serverData.ServerDataStrategy;
+import serverData.ServerDataStrategyFactory;
+
 public class ServerApplication {
+	public static final String EXIT_COMMAND = "EXIT";
+	
 	ServerCmdValue cmdValues = null;
 	
 	CopyOnWriteArrayList<Socket> clients;
+	
+	ServerDataStrategy dataStrategy;
 	
 	ThreadPoolExecutor executor;
 	
 	public ServerApplication() {
 		clients = new CopyOnWriteArrayList<>();
+		
+		dataStrategy = ServerDataStrategyFactory.getInstance().getJsonStrategy();
 		
 		int numThreads = Runtime.getRuntime().availableProcessors();
 		executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(numThreads);
@@ -29,7 +38,12 @@ public class ServerApplication {
 	}
 	
 	public void run() {
+		// check command line values
 		if (!cmdValues.isErrorFree())
+			return;
+		
+		// check whether could open dictionary file correctly
+		if (!dataStrategy.setDataSource(cmdValues.getDicPath()))
 			return;
 		
 		ServerSocketFactory factory = ServerSocketFactory.getDefault();
@@ -134,8 +148,10 @@ public class ServerApplication {
 			    		+ clientSocket.getRemoteSocketAddress().toString() + " "
 			    		+ clientSocket.getPort() + ", at port: " + clientSocket.getLocalPort());
 			    	
-			    if (!request.equals("EXIT")) {
-			    	output.writeUTF(request);
+			    if (!request.equals(EXIT_COMMAND)) {
+			    	String respond = dataStrategy.processRequest(request);
+			    	
+			    	output.writeUTF(respond);
 				    output.flush();
 			    }
 			    else {

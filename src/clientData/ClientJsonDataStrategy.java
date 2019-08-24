@@ -1,14 +1,13 @@
 package clientData;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONObject;
 
 import clientApplication.ClientApplication;
 
 public class ClientJsonDataStrategy implements ClientDataStrategy {
 
 	@Override
-	public String packData(String command, String word, String meaning) {
+	public String packRequest(String command, String word, String meaning) {
 		if (command == null || word == null || 
 				command.isEmpty() || word.isEmpty())
 			return ClientApplication.EXIT_COMMAND;
@@ -36,7 +35,7 @@ public class ClientJsonDataStrategy implements ClientDataStrategy {
 				default:
 					json.put("isValid", "false");
 			}
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			System.err.println("[ERROR]: JSON data create failed for: " + command 
 					+ " - " + word);
@@ -47,7 +46,7 @@ public class ClientJsonDataStrategy implements ClientDataStrategy {
 	}
 
 	@Override
-	public String resolveData(String data) {
+	public String resolveRespond(String data) {
 		if (data == null || data.isEmpty())
 			return "";
 		

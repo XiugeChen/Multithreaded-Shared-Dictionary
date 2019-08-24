@@ -31,7 +31,7 @@ public class ClientApplication {
 		}
 		
 		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
-				.packData("query", word, "");
+				.packRequest("query", word, "");
 		
 		return sendRequest(request);
 	}
@@ -43,7 +43,7 @@ public class ClientApplication {
 		}
 		
 		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
-				.packData("add", word, meaning);
+				.packRequest("add", word, meaning);
 		
 		return sendRequest(request);
 	}
@@ -55,7 +55,7 @@ public class ClientApplication {
 		}
 		
 		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
-				.packData("remove", word, "");
+				.packRequest("remove", word, "");
 		
 		return sendRequest(request);
 	}

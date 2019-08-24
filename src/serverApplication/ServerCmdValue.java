@@ -7,8 +7,6 @@ import org.kohsuke.args4j.Option;
 public class ServerCmdValue {
 	private static final int USAGE_WIDTH = 100;
 	
-	private static final String DEFAULT_DIC_PATH = "/resources/data/dictionary.json";
-	
 	private static final int SMALLEST_PORT = 1025;
 	private static final int LARGEST_PORT = 65535;
 	
@@ -81,7 +79,7 @@ public class ServerCmdValue {
     
     public String getDicPath() {
     	if (dicPath == null)
-    		return DEFAULT_DIC_PATH;
+    		return "";
     	
     	return dicPath;
     }
