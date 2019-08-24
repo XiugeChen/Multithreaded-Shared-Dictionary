@@ -7,7 +7,11 @@ import java.net.Socket;
 
 import org.kohsuke.args4j.CmdLineParser;
 
+import clientData.ClientDataStrategyFactory;
+
 public class ClientApplication {
+	
+	public static final String EXIT_COMMAND = "EXIT";
 	
 	ClientCmdValue cmdValues = null;
 	Socket socket = null;
@@ -26,7 +30,10 @@ public class ClientApplication {
 				return "[Error]: No server connection";
 		}
 		
-		return sendRequest(word);
+		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
+				.packData("query", word, "");
+		
+		return sendRequest(request);
 	}
 	
 	public String addWord(String word, String meaning) {
@@ -35,7 +42,10 @@ public class ClientApplication {
 				return "[Error]: No server connection";
 		}
 		
-		return sendRequest(word + " " + meaning);
+		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
+				.packData("add", word, meaning);
+		
+		return sendRequest(request);
 	}
 	
 	public String removeWord(String word) {
@@ -44,12 +54,15 @@ public class ClientApplication {
 				return "[Error]: No server connection";
 		}
 		
-		return sendRequest(word);
+		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
+				.packData("remove", word, "");
+		
+		return sendRequest(request);
 	}
 	
 	public void exit() {
 		if (!socket.isClosed())
-			sendRequest("EXIT");
+			sendRequest(EXIT_COMMAND);
 		
 		System.exit(1);
 	}
@@ -93,7 +106,7 @@ public class ClientApplication {
 			output.writeUTF(request);
 			output.flush();
 			
-			if (request.equals("EXIT")) {
+			if (request.equals(EXIT_COMMAND)) {
 				return "";
 			}
 			else {
