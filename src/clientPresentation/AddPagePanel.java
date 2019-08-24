@@ -62,7 +62,7 @@ public class AddPagePanel extends ClientPanel {
 		// set button functions
 		addButton.addActionListener(new AddAction());
 		backButton.addActionListener((event) -> ClientGUIControl.getInstance().backToHome());
-		quitButton.addActionListener((event) -> System.exit(0));
+		quitButton.addActionListener((event) -> ClientAppFacade.getInstance().exit());
 		
 		returnList.setBorder(BorderFactory.createEtchedBorder());
 		

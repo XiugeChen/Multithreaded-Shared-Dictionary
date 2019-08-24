@@ -36,6 +36,11 @@ public class ClientAppFacade {
 		return clientApp.removeWord(word);
 	}
 	
+	public void exit() {
+		clientApp.exit();
+		System.exit(1);
+	}
+	
 	public boolean rcvCmdArgs(String[] args) {
 		if (clientApp.setCmd(args)) {
 			if (clientApp.setConnection())

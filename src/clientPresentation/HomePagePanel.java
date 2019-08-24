@@ -9,6 +9,8 @@ import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 
+import clientApplication.ClientAppFacade;
+
 public class HomePagePanel extends ClientPanel {
 	public HomePagePanel() {
 		super();
@@ -31,7 +33,7 @@ public class HomePagePanel extends ClientPanel {
 		queryButton.addActionListener((event) -> ClientGUIControl.getInstance().queryWord());
 		addButton.addActionListener((event) -> ClientGUIControl.getInstance().addWord());
 		removeButton.addActionListener((event) -> ClientGUIControl.getInstance().removeWord());
-		quitButton.addActionListener((event) -> System.exit(0));
+		quitButton.addActionListener((event) -> ClientAppFacade.getInstance().exit());
 
 		createLayout(queryButton, addButton, removeButton, quitButton);
 	}

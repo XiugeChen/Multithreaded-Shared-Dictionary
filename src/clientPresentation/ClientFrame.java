@@ -11,6 +11,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import clientApplication.ClientAppFacade;
+
 public class ClientFrame extends JFrame {
 	private static final int WINDOW_WIDTH = 730;
 	private static final int WINDOW_HEIGHT = 390;
@@ -116,7 +118,7 @@ public class ClientFrame extends JFrame {
                 InputEvent.CTRL_DOWN_MASK));
         
         // add functions to menu items
-        exitMenuItem.addActionListener((event) -> System.exit(0));
+        exitMenuItem.addActionListener((event) -> ClientAppFacade.getInstance().exit());
         
         // add items to menu
         fileMenu.add(newMenuItem);
