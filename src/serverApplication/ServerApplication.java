@@ -43,7 +43,7 @@ public class ServerApplication<sychronized> {
 	
 	public void run() {
 		// check command line values
-		if (!cmdValues.isErrorFree())
+		if (!cmdValues.isErrorFree()) 
 			return;
 		
 		// check whether could open dictionary file correctly

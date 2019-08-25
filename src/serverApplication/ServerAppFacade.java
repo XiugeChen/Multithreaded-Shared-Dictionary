@@ -20,6 +20,7 @@ public class ServerAppFacade {
 	public void runServer() {
 		ServerGUIControl.getInstance().runServerGUI();
 		serverApp.run();
+		System.exit(1);
 	}
 	
 	public boolean rcvCmdArgs(String[] args) {
