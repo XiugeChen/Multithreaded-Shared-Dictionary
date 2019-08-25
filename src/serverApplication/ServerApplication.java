@@ -16,7 +16,7 @@ import org.kohsuke.args4j.CmdLineParser;
 import serverData.ServerDataStrategy;
 import serverData.ServerDataStrategyFactory;
 
-public class ServerApplication {
+public class ServerApplication<sychronized> {
 	public static final String EXIT_COMMAND = "EXIT";
 	
 	ServerCmdValue cmdValues = null;
@@ -64,7 +64,7 @@ public class ServerApplication {
 				System.out.println("[INFO]: accept client: " + client.getRemoteSocketAddress().toString()
 				+ " " + client.getPort() + ", and bonded to local port: " + client.getLocalPort() );
 					
-				getClients().add(client);
+				clients.add(client);
 				System.out.println("[INFO]: add client " + client.getRemoteSocketAddress().toString() + " "
 			    		+ client.getPort() + " to list");
 			}
@@ -93,16 +93,12 @@ public class ServerApplication {
 		return true;
 	}
 	
-	public CopyOnWriteArrayList<Socket> getClients() {
-		return clients;
-	}
-	
 	private void requestAssign() {
 		while (true) {
-			if (getClients().size() == 0)
+			if (clients.size() == 0)
 				continue;
 			
-			for (Socket client: getClients()) {
+			for (Socket client: clients) {
 				// Input stream
 				try {
 					DataInputStream input = new DataInputStream(client.getInputStream());
@@ -167,7 +163,7 @@ public class ServerApplication {
 				isClosed = true;
 			} finally {
 				if (isClosed) {
-					getClients().remove(clientSocket);
+					clients.remove(clientSocket);
 			    	System.out.println("[INFO]: remove client: " + clientSocket.getRemoteSocketAddress().toString() + " "
 				    		+ clientSocket.getPort() + " from list");
 			    	try {

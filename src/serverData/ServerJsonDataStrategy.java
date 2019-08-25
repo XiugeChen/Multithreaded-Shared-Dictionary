@@ -54,7 +54,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 
 	@Override
 	public String processRequest(String request) {
-		String respond = "";
+		String respond = "[ERROR]: Invalid request";
 		
 		if (request == null || request.isEmpty())
 			return respond;
@@ -68,7 +68,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		} catch (ParseException e) {
 			System.err.println(e.getMessage());
             System.err.println("[ERROR]: parse json failed from request: " + request);
-            return "[ERROR]: invalid request";
+            return respond;
 		}
 		
 		// different action based on different command
@@ -88,7 +88,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 				respond = "[ERROR]: Unkown request command/type";
 		}
 		
-		return request;
+		return respond;
 	}
 	
 	private FileReader readFile(String file) {
@@ -123,29 +123,81 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 	}
 	
 	private String queryWord(String word) {
-		return word;
+		String response = "[INFO]: Can not find word: " + word + " on server";
+		JSONArray pairs = (JSONArray) dictData.get("data");
+		
+		for (int i = 0; i < pairs.size(); i++) {
+			JSONObject pair = (JSONObject) pairs.get(i);
+			
+			if (pair.get("word").toString().equals(word)) {
+				response = pair.get("meaning").toString();
+				break;
+			}
+		}
+		
+		return response;
 	}
 	
 	private String removeWord(String word) {
+		JSONArray pairs = (JSONArray) dictData.get("data");
+		int i = 0;
 		
-		if (updateDic()) {
-			return "[INFO]: Successfully update server with removing";
+		for (i = 0; i < pairs.size(); i++) {
+			JSONObject pair = (JSONObject) pairs.get(i);
+			
+			if (pair.get("word").toString().equals(word)) {
+				break;
+			}
+		}
+		
+		if (i < pairs.size()) {
+			pairs.remove(i);
+			dictData.put("data", pairs);
+			
+			if (updateDic()) {
+				return "[INFO]: Successfully update server with removing";
+			}
+			else {
+				return "[ERROR]: Update server with removing failed";
+			}
 		}
 		else {
-			return "[ERROR]: Update server with removing failed";
+			return "[INFO]: Can not find word " + word + " on server";
 		}
 	}
 	
 	private String addWord(String word, String meaning) {
-		if (updateDic()) {
-			return "[INFO]: Successfully update server with adding";
+		JSONArray pairs = (JSONArray) dictData.get("data");
+		boolean wordExist = false;
+		
+		for (int i = 0; i < pairs.size(); i++) {
+			JSONObject pair = (JSONObject) pairs.get(i);
+			
+			if (pair.get("word").toString().equals(word)) {
+				wordExist = true;
+				break;
+			}
+		}
+		
+		if (!wordExist) {
+			JSONObject newWord = new JSONObject();
+			newWord.put("meaning", meaning);
+			newWord.put("word", word);
+			pairs.add(newWord);
+			
+			if (updateDic()) {
+				return "[INFO]: Successfully update server with adding";
+			}
+			else {
+				return "[ERROR]: Update server with adding failed";
+			}
 		}
 		else {
-			return "[ERROR]: Update server with adding failed";
+			return "[INFO]: Word " + word + " already exists in the server";
 		}
 	}
 	
-	private boolean updateDic() {
+	private synchronized boolean updateDic() {
 		if (file == null || file.isEmpty() || dictData == null)
 			return false;
 		
