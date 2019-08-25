@@ -11,10 +11,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.net.ServerSocketFactory;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.kohsuke.args4j.CmdLineParser;
 
 import serverData.ServerDataStrategy;
 import serverData.ServerDataStrategyFactory;
+import serverPresentation.ServerGUIControl;
 
 public class ServerApplication<sychronized> {
 	public static final String EXIT_COMMAND = "EXIT";
@@ -62,7 +66,10 @@ public class ServerApplication<sychronized> {
 			while(true) {
 				Socket client = server.accept();
 				System.out.println("[INFO]: accept client: " + client.getRemoteSocketAddress().toString()
-				+ " " + client.getPort() + ", and bonded to local port: " + client.getLocalPort() );
+				+ " " + client.getPort() + ", and bonded to local port: " + client.getLocalPort());
+				
+				ServerGUIControl.getInstance().addConnection(client.getRemoteSocketAddress().toString()
+						, Integer.toString(client.getPort()));
 					
 				clients.add(client);
 				System.out.println("[INFO]: add client " + client.getRemoteSocketAddress().toString() + " "
@@ -144,15 +151,22 @@ public class ServerApplication<sychronized> {
 			    		+ clientSocket.getRemoteSocketAddress().toString() + " "
 			    		+ clientSocket.getPort() + ", at port: " + clientSocket.getLocalPort());
 			    	
+			    String respond = "NA";
 			    if (!request.equals(EXIT_COMMAND)) {
-			    	String respond = dataStrategy.processRequest(request);
+			    	respond = dataStrategy.processRequest(request);
 			    	
 			    	output.writeUTF(respond);
 				    output.flush();
 			    }
 			    else {
 			    	isClosed = true;
+			    	respond = "Close socket";
 			    }
+			    
+			    String action = getAction(request);
+			    ServerGUIControl.getInstance().addAction(clientSocket.getRemoteSocketAddress().toString()
+		    			, Integer.toString(clientSocket.getPort()), action, respond);
+			    
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 				System.out.println("[ERROR]: client close socket without signal");
@@ -166,6 +180,10 @@ public class ServerApplication<sychronized> {
 					clients.remove(clientSocket);
 			    	System.out.println("[INFO]: remove client: " + clientSocket.getRemoteSocketAddress().toString() + " "
 				    		+ clientSocket.getPort() + " from list");
+			    	
+			    	ServerGUIControl.getInstance().removeConnection(clientSocket.getRemoteSocketAddress().toString(), 
+			    			Integer.toString(clientSocket.getPort()));
+			    	
 			    	try {
 						clientSocket.close();
 					} catch (IOException e) {
@@ -174,6 +192,28 @@ public class ServerApplication<sychronized> {
 					}
 				}
 			}
+		}
+		
+		private String getAction(String request) {
+			if (request.equals(EXIT_COMMAND))
+				return EXIT_COMMAND;
+			
+			JSONParser jsonParser = new JSONParser();
+			JSONObject requestJSON = new JSONObject();
+			
+			//Read JSON requst
+			try {
+				requestJSON = (JSONObject) jsonParser.parse(request);
+			} catch (ParseException e) {
+				System.err.println(e.getMessage());
+	            System.err.println("[ERROR]: parse json failed from request: " + request);
+	            return "Unable to identify action - " + request;
+			}
+			
+			// different action based on different command
+			String command = requestJSON.get("command").toString();
+			String word = requestJSON.get("word").toString();
+			return command + " - " + word;
 		}
 	}
 }

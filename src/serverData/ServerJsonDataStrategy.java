@@ -129,7 +129,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		for (int i = 0; i < pairs.size(); i++) {
 			JSONObject pair = (JSONObject) pairs.get(i);
 			
-			if (pair.get("word").toString().equals(word)) {
+			if (pair.get("word").toString().equals(word.toLowerCase())) {
 				response = pair.get("meaning").toString();
 				break;
 			}
@@ -145,7 +145,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		for (i = 0; i < pairs.size(); i++) {
 			JSONObject pair = (JSONObject) pairs.get(i);
 			
-			if (pair.get("word").toString().equals(word)) {
+			if (pair.get("word").toString().equals(word.toLowerCase())) {
 				break;
 			}
 		}
@@ -173,7 +173,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		for (int i = 0; i < pairs.size(); i++) {
 			JSONObject pair = (JSONObject) pairs.get(i);
 			
-			if (pair.get("word").toString().equals(word)) {
+			if (pair.get("word").toString().equals(word.toLowerCase())) {
 				wordExist = true;
 				break;
 			}
@@ -182,7 +182,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		if (!wordExist) {
 			JSONObject newWord = new JSONObject();
 			newWord.put("meaning", meaning);
-			newWord.put("word", word);
+			newWord.put("word", word.toLowerCase());
 			pairs.add(newWord);
 			
 			if (updateDic()) {

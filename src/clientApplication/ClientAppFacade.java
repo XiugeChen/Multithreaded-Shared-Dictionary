@@ -43,8 +43,8 @@ public class ClientAppFacade {
 	
 	public boolean rcvCmdArgs(String[] args) {
 		if (clientApp.setCmd(args)) {
-			if (clientApp.setConnection())
-				return true;
+			clientApp.setConnection();
+			return true;
 		}
 		
 		return false;

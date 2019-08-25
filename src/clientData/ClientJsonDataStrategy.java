@@ -15,8 +15,8 @@ public class ClientJsonDataStrategy implements ClientDataStrategy {
 		JSONObject json = new JSONObject();
 		
 		try {
-			json.put("command", command);
-			json.put("word", word);
+			json.put("command", command.toLowerCase());
+			json.put("word", word.toLowerCase());
 			
 			switch (command.toLowerCase()) {
 				case "add":

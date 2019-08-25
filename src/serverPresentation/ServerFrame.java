@@ -1,4 +1,4 @@
-package clientPresentation;
+package serverPresentation;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
@@ -12,60 +12,30 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 import clientApplication.ClientAppFacade;
+import clientPresentation.ClientPanelFactory;
 
-public class ClientFrame extends JFrame {
-	private static final int WINDOW_WIDTH = 730;
-	private static final int WINDOW_HEIGHT = 390;
+public class ServerFrame extends JFrame {
+	private static final int WINDOW_WIDTH = 800;
+	private static final int WINDOW_HEIGHT = 600;
 	
-	private static final String DICT_ICON_PATH = "resources/images/dictionaryIcon.png";
-	private static final String NEW_ICON_PATH = "resources/images/addIcon.png";
 	private static final String HOME_ICON_PATH = "resources/images/homeIcon.png";
 	private static final String EXIT_ICON_PATH = "resources/images/exitIcon.png";
-
-	public ClientFrame() {
-		initUI();
-	}
 	
-	public void display(String page) {
-		getContentPane().removeAll();
-		getContentPane().invalidate();
-		
-		switch (page.toLowerCase()) {
-			case "add":
-				getContentPane().add(ClientPanelFactory.getInstance().getAddPagePanel());
-				setTitle("Unimelb COMP90015 Dictionary - Client Add");
-				break;
-			case "remove":
-				getContentPane().add(ClientPanelFactory.getInstance().getRemovePagePanel());
-				setTitle("Unimelb COMP90015 Dictionary - Client Remove");
-				break;
-			case "query":
-				getContentPane().add(ClientPanelFactory.getInstance().getQueryPagePanel());
-				setTitle("Unimelb COMP90015 Dictionary - Client Query");
-				break;
-			default:
-				getContentPane().add(ClientPanelFactory.getInstance().getHomePagePanel());
-				setTitle("Unimelb COMP90015 Dictionary - Client Home");
-		}
-		
-		getContentPane().revalidate();
+	public ServerFrame() {
+		initUI();
 	}
 	
 	private void initUI() {
 		createMenuBar();
 		
 		// load start home page
-		getContentPane().add(ClientPanelFactory.getInstance().getHomePagePanel());
-        
-        // set frame image icon
-        ImageIcon dicIcon = new ImageIcon(DICT_ICON_PATH);
-        setIconImage(dicIcon.getImage());
+		getContentPane().add(ServerPanelFactory.getInstance().getHomePage());
         
         // window settings
-		setTitle("Unimelb COMP90015 Dictionary - Client Home");
+		setTitle("Unimelb COMP90015 Dictionary - Server");
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 	private void createMenuBar() {
@@ -80,12 +50,10 @@ public class ClientFrame extends JFrame {
         helpMenu.setMnemonic(KeyEvent.VK_H);
         
         // create items in file menu, add image if possible
-        JMenuItem newMenuItem = null;
 		JMenuItem exitMenuItem = null;
 		JMenuItem subjectMenuItem = null;
 		
         try {
-    		newMenuItem = new JMenuItem("New", new ImageIcon(NEW_ICON_PATH));
     		exitMenuItem = new JMenuItem("Exit", new ImageIcon(EXIT_ICON_PATH));
     		subjectMenuItem = new JMenuItem("Website", new ImageIcon(HOME_ICON_PATH));
         } catch (Exception e) {
@@ -93,20 +61,13 @@ public class ClientFrame extends JFrame {
         	System.err.println(e.getMessage());
         	e.printStackTrace();
         } finally {
-        	if (newMenuItem == null)
-        		newMenuItem = new JMenuItem("New");
         	if (exitMenuItem == null)
         		exitMenuItem = new JMenuItem("Exit");
         	if (subjectMenuItem == null)
         		subjectMenuItem = new JMenuItem("Website");
         }
         
-        // add description(toolTip text), shortcuts
-        newMenuItem.setMnemonic(KeyEvent.VK_N);
-        newMenuItem.setToolTipText("New window");
-        newMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
-                InputEvent.CTRL_DOWN_MASK));
-        
+        // add description(toolTip text), shortcuts  
         exitMenuItem.setMnemonic(KeyEvent.VK_E);
         exitMenuItem.setToolTipText("Exit application");
         exitMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,
@@ -118,10 +79,9 @@ public class ClientFrame extends JFrame {
                 InputEvent.CTRL_DOWN_MASK));
         
         // add functions to menu items
-        exitMenuItem.addActionListener((event) -> ClientAppFacade.getInstance().exit());
+        exitMenuItem.addActionListener((event) -> System.exit(1));
         
         // add items to menu
-        fileMenu.add(newMenuItem);
         fileMenu.add(exitMenuItem);
         helpMenu.add(subjectMenuItem);
         
@@ -132,5 +92,3 @@ public class ClientFrame extends JFrame {
         setJMenuBar(menuBar);
     }
 }
-
-

@@ -61,7 +61,7 @@ public class ClientApplication {
 	}
 	
 	public void exit() {
-		if (!socket.isClosed())
+		if (socket != null && !socket.isClosed())
 			sendRequest(EXIT_COMMAND);
 		
 		System.exit(1);
@@ -81,6 +81,7 @@ public class ClientApplication {
 		    return true;
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			System.err.println("[INFO]: Set up connection with server failed");
 			return false;
 		}
 	}
@@ -101,8 +102,6 @@ public class ClientApplication {
 	
 	private String sendRequest(String request) {
 		try {
-			System.out.println(request);
-		
 			output.writeUTF(request);
 			output.flush();
 			

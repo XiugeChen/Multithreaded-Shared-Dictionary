@@ -1,5 +1,7 @@
 package serverApplication;
 
+import serverPresentation.ServerGUIControl;
+
 public class ServerAppFacade {
 	private static ServerAppFacade instance = null;
 	private ServerApplication serverApp;
@@ -16,6 +18,7 @@ public class ServerAppFacade {
 	}
 	
 	public void runServer() {
+		ServerGUIControl.getInstance().runServerGUI();
 		serverApp.run();
 	}
 	
