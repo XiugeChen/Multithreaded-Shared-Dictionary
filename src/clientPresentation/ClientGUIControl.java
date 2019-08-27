@@ -3,9 +3,9 @@ package clientPresentation;
 import java.awt.EventQueue;
 
 /**
- * Singleton control interface of GUI
- * @author xiugechen
- *
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
  */
 public class ClientGUIControl {
 	

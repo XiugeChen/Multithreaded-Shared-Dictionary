@@ -8,13 +8,20 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ServerJsonDataStrategy implements ServerDataStrategy {
 	private static final String DEFAULT_DIC_PATH = "resources/data/dictionary.json";
+	private final static Logger logger = Logger.getLogger(ServerJsonDataStrategy.class);
 	
 	private JSONObject dictData = null;
 	private String file = null;
@@ -29,7 +36,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		JSONParser jsonParser = new JSONParser();
 		
 		if (source == null || source.isEmpty() || !source.contains(".json")) {
-			System.out.println("[INFO]: file not specified or not in .json format, open default file: "
+			logger.info("File not specified or not in .json format, open default file: "
 					+ DEFAULT_DIC_PATH);
 			file = DEFAULT_DIC_PATH;
 		}
@@ -43,12 +50,14 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		try {
             //Read JSON file
             dictData = (JSONObject) jsonParser.parse(reader);
+            logger.info("Open json file successfully");
             return true;
         } catch (IOException | ParseException e) {
-        	System.err.println(e.getMessage());
-            System.err.println("[ERROR]: parse json failed from file: " + file);
+        	logger.fatal(e.toString());
+        	logger.fatal("Parse json failed from file: " + file);
         }
 		
+		logger.fatal("Open json file failed");
 		return false;
 	}
 
@@ -56,8 +65,10 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 	public String processRequest(String request) {
 		String respond = "[ERROR]: Invalid request";
 		
-		if (request == null || request.isEmpty())
+		if (request == null || request.isEmpty()) {
+			logger.error("Recieve invalid request: " + request);
 			return respond;
+		}
 		
 		JSONParser jsonParser = new JSONParser();
 		JSONObject requestJSON = new JSONObject();
@@ -66,14 +77,21 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		try {
 			requestJSON = (JSONObject) jsonParser.parse(request);
 		} catch (ParseException e) {
-			System.err.println(e.getMessage());
-            System.err.println("[ERROR]: parse json failed from request: " + request);
+			logger.error(e.toString());
+			logger.error("Parse json failed from request: " + request);
             return respond;
 		}
 		
 		// different action based on different command
 		String command = requestJSON.get("command").toString();
 		String word = requestJSON.get("word").toString();
+		Boolean isValid = Boolean.parseBoolean(requestJSON.get("isValid").toString());
+		
+		if (!isValid) {
+			logger.info("Recieve invalid tag request from user");
+			return respond;
+		}
+		
 		switch(command) {
 			case "query":
 				respond = queryWord(word);
@@ -85,25 +103,27 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 				respond = removeWord(word);
 				break;
 			default:
+				logger.error("Unkown request common/type from user");
 				respond = "[ERROR]: Unkown request command/type";
 		}
 		
 		return respond;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private FileReader readFile(String file) {
 		FileReader reader = null;
 		
 		try {
 			reader = new FileReader(file);
 		} catch (FileNotFoundException e) {
-			System.err.println(e.getMessage());
-            System.err.println("[ERROR]: can't find json file: " + file);
+			logger.error(e.toString());
+			logger.error("can't find json file: " + file);
             
             try {
             	File newFile = new File(file);
             	newFile.createNewFile();
-            	System.out.println("[INFO]: create new file at: " + file);
+            	logger.info("Create new file at: " + file);
             	
             	// initialize data
             	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
@@ -114,8 +134,8 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
             	
             	reader = new FileReader(newFile);
             } catch (IOException e1) {
-            	System.err.println(e1.getMessage());
-                System.err.println("[ERROR]: can't create new json file or read from it: " + file);
+            	logger.error(e1.toString());
+            	logger.error("Can't create new json file or read from it: " + file);
             }
 		}
 		
@@ -123,6 +143,8 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 	}
 	
 	private String queryWord(String word) {
+		logger.info("Recieve query request of word: " + word);
+		
 		String response = "[INFO]: Can not find word: " + word + " on server";
 		JSONArray pairs = (JSONArray) dictData.get("data");
 		
@@ -134,11 +156,14 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 				break;
 			}
 		}
-		
+
 		return response;
 	}
 	
-	private String removeWord(String word) {
+	@SuppressWarnings("unchecked")
+	private  String removeWord(String word) {
+		logger.info("Recieve remove request of word: " + word);
+		
 		JSONArray pairs = (JSONArray) dictData.get("data");
 		int i = 0;
 		
@@ -166,7 +191,10 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private String addWord(String word, String meaning) {
+		logger.info("Recieve add request of word: " + word + ", with meaning: " + meaning);
+		
 		JSONArray pairs = (JSONArray) dictData.get("data");
 		boolean wordExist = false;
 		
@@ -175,6 +203,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 			
 			if (pair.get("word").toString().equals(word.toLowerCase())) {
 				wordExist = true;
+				logger.warn("New word \"" + word + "\" already exist in the dictionary");
 				break;
 			}
 		}
@@ -197,6 +226,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	private synchronized boolean updateDic() {
 		if (file == null || file.isEmpty() || dictData == null)
 			return false;
@@ -208,10 +238,11 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 			writer.write(dictData.toJSONString());
 			System.out.println("[INFO]: Update json file successfully: " + file);
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
-            System.err.println("[ERROR]: can't write json to file: " + file);
+			logger.error(e.toString());
+			logger.error("Can't write json to file: " + file);
 		}
 		
+		logger.info("Update dictionary successfully");
 		return true;
 	}
 }

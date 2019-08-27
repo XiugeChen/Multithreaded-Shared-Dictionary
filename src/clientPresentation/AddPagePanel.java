@@ -22,17 +22,27 @@ import javax.swing.GroupLayout.SequentialGroup;
 
 import clientApplication.ClientAppFacade;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class AddPagePanel extends ClientPanel {
+	private static final long serialVersionUID = 1L;
+	
 	private static final int RETURN_WIDTH = 500;
 	private static final int RETURN_HEIGHT = 50;
 	private static final int INPUT_WIDTH = 100;
 	
+	@SuppressWarnings("rawtypes")
 	private JList returnList;
-    private DefaultListModel model;
+    @SuppressWarnings("rawtypes")
+	private DefaultListModel model;
     private JTextField wordText;
     private JTextField meaningText;
     
-    public AddPagePanel() {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public AddPagePanel() {
 		super();
 		
 		model = new DefaultListModel();
@@ -69,6 +79,7 @@ public class AddPagePanel extends ClientPanel {
 		createLayout(returnList, addButton, backButton, quitButton);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void createLayout(JList returnList, JComponent... arg) {
         GroupLayout gl = new GroupLayout(this);
         this.setLayout(gl);
@@ -119,6 +130,9 @@ public class AddPagePanel extends ClientPanel {
     }
 	
 	private class AddAction extends AbstractAction{
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("unchecked")
 		@Override
 	    public void actionPerformed(ActionEvent e) {
             if (!model.isEmpty())

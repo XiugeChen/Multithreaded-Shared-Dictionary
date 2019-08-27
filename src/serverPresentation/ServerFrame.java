@@ -11,15 +11,25 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
-import clientApplication.ClientAppFacade;
-import clientPresentation.ClientPanelFactory;
+import org.apache.log4j.Logger;
 
+import serverApplication.ServerAppFacade;
+
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ServerFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
 	private static final int WINDOW_WIDTH = 800;
 	private static final int WINDOW_HEIGHT = 600;
 	
 	private static final String HOME_ICON_PATH = "resources/images/homeIcon.png";
 	private static final String EXIT_ICON_PATH = "resources/images/exitIcon.png";
+	
+	private final static Logger logger = Logger.getLogger(ServerFrame.class);
 	
 	public ServerFrame() {
 		initUI();
@@ -57,9 +67,8 @@ public class ServerFrame extends JFrame {
     		exitMenuItem = new JMenuItem("Exit", new ImageIcon(EXIT_ICON_PATH));
     		subjectMenuItem = new JMenuItem("Website", new ImageIcon(HOME_ICON_PATH));
         } catch (Exception e) {
-        	System.err.println("[INFO]: Load menu item images failed");
-        	System.err.println(e.getMessage());
-        	e.printStackTrace();
+        	logger.warn(e.toString());
+        	logger.warn("Load menu item images failed");
         } finally {
         	if (exitMenuItem == null)
         		exitMenuItem = new JMenuItem("Exit");
@@ -79,7 +88,7 @@ public class ServerFrame extends JFrame {
                 InputEvent.CTRL_DOWN_MASK));
         
         // add functions to menu items
-        exitMenuItem.addActionListener((event) -> System.exit(1));
+        exitMenuItem.addActionListener((event) -> ServerAppFacade.getInstance().exit());
         
         // add items to menu
         fileMenu.add(exitMenuItem);

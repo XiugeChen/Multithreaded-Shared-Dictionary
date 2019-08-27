@@ -4,7 +4,14 @@ import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public abstract class ServerTableMode extends AbstractTableModel {
+	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<String> columnNames;
 	private ArrayList<ArrayList<String>> tableData;
 	

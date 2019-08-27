@@ -11,7 +11,14 @@ import javax.swing.GroupLayout.SequentialGroup;
 
 import clientApplication.ClientAppFacade;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class HomePagePanel extends ClientPanel {
+	private static final long serialVersionUID = 1L;
+
 	public HomePagePanel() {
 		super();
 		createButtons();

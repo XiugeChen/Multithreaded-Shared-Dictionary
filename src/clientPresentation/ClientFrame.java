@@ -11,9 +11,18 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
+import org.apache.log4j.Logger;
+
 import clientApplication.ClientAppFacade;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ClientFrame extends JFrame {
+	private static final long serialVersionUID = 1L;
+	
 	private static final int WINDOW_WIDTH = 730;
 	private static final int WINDOW_HEIGHT = 390;
 	
@@ -21,6 +30,8 @@ public class ClientFrame extends JFrame {
 	private static final String NEW_ICON_PATH = "resources/images/addIcon.png";
 	private static final String HOME_ICON_PATH = "resources/images/homeIcon.png";
 	private static final String EXIT_ICON_PATH = "resources/images/exitIcon.png";
+	
+	private final static Logger logger = Logger.getLogger(ClientFrame.class);
 
 	public ClientFrame() {
 		initUI();
@@ -89,9 +100,8 @@ public class ClientFrame extends JFrame {
     		exitMenuItem = new JMenuItem("Exit", new ImageIcon(EXIT_ICON_PATH));
     		subjectMenuItem = new JMenuItem("Website", new ImageIcon(HOME_ICON_PATH));
         } catch (Exception e) {
-        	System.err.println("[INFO]: Load menu item images failed");
-        	System.err.println(e.getMessage());
-        	e.printStackTrace();
+        	logger.warn(e.toString());
+        	logger.warn("Load menu item images failed");
         } finally {
         	if (newMenuItem == null)
         		newMenuItem = new JMenuItem("New");

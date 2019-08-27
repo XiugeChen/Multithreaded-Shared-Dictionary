@@ -5,71 +5,73 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import org.apache.log4j.Logger;
 import org.kohsuke.args4j.CmdLineParser;
 
 import clientData.ClientDataStrategyFactory;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ClientApplication {
-	
 	public static final String EXIT_COMMAND = "EXIT";
+	private final static Logger logger = Logger.getLogger(ClientApplication.class);
 	
 	ClientCmdValue cmdValues = null;
 	Socket socket = null;
 	
-	// Input Stream
+	// Input and Output Stream
 	DataInputStream input;
-	// Output Stream
 	DataOutputStream output;
 	
 	public ClientApplication() {
 	}
 	
 	public String queryWord(String word) {
-		if (socket == null || socket.isClosed()) {
-			if (!setConnection())
-				return "[Error]: No server connection";
-		}
-		
-		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
+		if (isConnectServer()) {
+			String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
 				.packRequest("query", word, "");
 		
-		return sendRequest(request);
+			return sendRequest(request);
+		}
+		
+		return "[Error]: No server connection";
 	}
 	
 	public String addWord(String word, String meaning) {
-		if (socket == null || socket.isClosed()) {
-			if (!setConnection())
-				return "[Error]: No server connection";
-		}
-		
-		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
+		if (isConnectServer()) {
+			String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
 				.packRequest("add", word, meaning);
 		
-		return sendRequest(request);
+			return sendRequest(request);
+		}
+		
+		return "[Error]: No server connection";
 	}
 	
 	public String removeWord(String word) {
-		if (socket == null || socket.isClosed()) {
-			if (!setConnection())
-				return "[Error]: No server connection";
-		}
-		
-		String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
+		if (isConnectServer()) {
+			String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
 				.packRequest("remove", word, "");
 		
-		return sendRequest(request);
+			return sendRequest(request);
+		}
+		
+		return "[Error]: No server connection";
 	}
 	
 	public void exit() {
-		if (socket != null && !socket.isClosed())
+		if (isConnectServer())
 			sendRequest(EXIT_COMMAND);
-		
-		System.exit(1);
 	}
 	
 	public boolean setConnection() {
-		if (!cmdValues.isErrorFree())
+		if (!cmdValues.isErrorFree()) {
+			logger.fatal("Command Line arguments not valid");
 			return false;
+		}
 		
 		try {
 			socket = new Socket(cmdValues.getServerAddr(), 
@@ -80,8 +82,8 @@ public class ClientApplication {
 			
 		    return true;
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.err.println("[INFO]: Set up connection with server failed");
+			logger.error(e.toString());
+			logger.error("Set up connection with server failed");
 			return false;
 		}
 	}
@@ -93,10 +95,12 @@ public class ClientApplication {
 	    try {
 	        parser.parseArgument(args);
 	    } catch (Exception e) {
-	    	System.err.println(e.getMessage());
+	    	logger.fatal(e.toString());
+	    	logger.fatal("Parse command line arguments failed");
 	        return false;
 	    }
 		
+	    logger.info("Parse command line arguments successfully");
 		return true;
 	}
 	
@@ -104,25 +108,39 @@ public class ClientApplication {
 		try {
 			output.writeUTF(request);
 			output.flush();
+			logger.info("Send request to server successfully");
 			
 			if (request.equals(EXIT_COMMAND)) {
 				return "";
 			}
 			else {
-				return input.readUTF();
+				String response = input.readUTF();
+				logger.info("Recieve reponse from server successfully");
+				return response;
 			}
 		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			System.err.println("[Error]: Send to or recieve from server failed");
+			logger.error(e.toString());
+			logger.error("Send to or recieve from server failed");
 			
 			try {
 				socket.close();
+				logger.info("Socket closed");
 			} catch (IOException e1) {
-				System.err.println(e1.getMessage());
-				System.err.println("[Error]: Close socket failed");
+				logger.error(e1.toString());
+				logger.error("Close socket failed");
 			}
 			
 			return "[Error]: Send request to server failed";
 		}
+	}
+	
+	private boolean isConnectServer() {
+		if (socket == null || socket.isClosed()) {
+			if (!setConnection()) {
+				logger.error("No server connection");
+				return false;
+			}
+		}
+		return true;
 	}
 }

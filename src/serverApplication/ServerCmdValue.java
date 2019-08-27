@@ -1,14 +1,22 @@
 package serverApplication;
 
+import org.apache.log4j.Logger;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.Option;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ServerCmdValue {
 	private static final int USAGE_WIDTH = 100;
 	
 	private static final int SMALLEST_PORT = 1025;
 	private static final int LARGEST_PORT = 65535;
+	
+	private final static Logger logger = Logger.getLogger(ServerCmdValue.class);
 	
 	@Option(name = "-p", aliases = { "--port" }, required = true,
             usage = "input server port")
@@ -35,7 +43,8 @@ public class ServerCmdValue {
 
             errorFree = true;
         } catch (Exception e) {
-        	System.err.println(e.getMessage());
+        	logger.fatal(e.toString());
+        	logger.fatal("Parse command line arguments failed");
         	parser.printUsage(System.err);
         	System.err.println("Correct format: java -jar DictionaryServer.jar "
         			+ "-p <port> -d <dictionary path(optional)>");
@@ -60,14 +69,14 @@ public class ServerCmdValue {
     	    if (port <= LARGEST_PORT && port >= SMALLEST_PORT)
     	    	return true;
     	    else {
-    	    	System.err.println("Port number should be some number between "
-    	    			+ SMALLEST_PORT + " and " +  LARGEST_PORT);
+    	    	logger.fatal("Port number should be some number between "
+    	    			+ SMALLEST_PORT + " and " +  LARGEST_PORT + ", instead of " + serverPort);
     	    	return false;
     	    }
     	  } catch(Exception e){
-    		  System.err.println(e.getMessage());
-    		  System.err.println("Port number should be some number between "
-  	    			+ SMALLEST_PORT + " and " +  LARGEST_PORT);
+    		  logger.fatal(e.toString());
+    		  logger.fatal("Port number should be some number between "
+    				  + SMALLEST_PORT + " and " +  LARGEST_PORT + ", instead of " + serverPort);
     		  return false;  
     	  }
     }

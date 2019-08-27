@@ -1,5 +1,10 @@
 package clientData;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ClientDataStrategyFactory {
 	private static ClientDataStrategyFactory instance = null;
 	private ClientJsonDataStrategy jsonStrategy;

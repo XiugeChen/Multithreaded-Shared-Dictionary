@@ -11,6 +11,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 
 import javax.net.ServerSocketFactory;
 
+import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -20,8 +21,15 @@ import serverData.ServerDataStrategy;
 import serverData.ServerDataStrategyFactory;
 import serverPresentation.ServerGUIControl;
 
-public class ServerApplication<sychronized> {
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
+public class ServerApplication {
 	public static final String EXIT_COMMAND = "EXIT";
+	
+	private final static Logger logger = Logger.getLogger(ServerApplication.class);
 	
 	ServerCmdValue cmdValues = null;
 	
@@ -38,51 +46,73 @@ public class ServerApplication<sychronized> {
 		
 		int numThreads = Runtime.getRuntime().availableProcessors();
 		executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(numThreads);
-		System.out.println("[INFO]: Thread pool with size " + numThreads + " created");
+		logger.info("Thread pool with size " + numThreads + " created");
 	}
 	
 	public void run() {
 		// check command line values
-		if (!cmdValues.isErrorFree()) 
+		if (!cmdValues.isErrorFree())  {
+			logger.fatal("Command line arguments not valid");
 			return;
+		}
 		
 		// check whether could open dictionary file correctly
-		if (!dataStrategy.setDataSource(cmdValues.getDicPath()))
+		if (!dataStrategy.setDataSource(cmdValues.getDicPath())) {
+			logger.fatal("Dictionary path not reachable: " + cmdValues.getDicPath());
 			return;
+		}
 		
 		ServerSocketFactory factory = ServerSocketFactory.getDefault();
 		
 		try(ServerSocket server = factory.createServerSocket(Integer.parseInt(
 				cmdValues.getServerPort()))) {
 			
-			System.out.println("[INFO]: Server start running at port: " + cmdValues.getServerPort());
+			logger.info("Server start running at port: " + cmdValues.getServerPort());
 			
 			// Start a new thread for a connection
 			Thread requestAssign = new Thread(() -> requestAssign());
 			requestAssign.start();
-			System.out.println("[INFO]: Start thread assignment thread");
+			logger.info("Start thread assignment thread");
 			
 			// Wait for connections.
 			while(true) {
 				Socket client = server.accept();
-				System.out.println("[INFO]: accept client: " + client.getRemoteSocketAddress().toString()
-				+ " " + client.getPort() + ", and bonded to local port: " + client.getLocalPort());
+				String clientAddr = client.getRemoteSocketAddress().toString();
+				String clientPort = Integer.toString(client.getPort());
 				
-				ServerGUIControl.getInstance().addConnection(client.getRemoteSocketAddress().toString()
-						, Integer.toString(client.getPort()));
+				logger.info("Accept client: " + clientAddr + " " + clientPort 
+						+ ", and bonded to local port: " + client.getLocalPort());
+				
+				ServerGUIControl.getInstance().addConnection(clientAddr, clientPort);
 					
 				clients.add(client);
-				System.out.println("[INFO]: add client " + client.getRemoteSocketAddress().toString() + " "
-			    		+ client.getPort() + " to list");
+				logger.info("Add client " + clientAddr + " " + clientPort + " to list");
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			System.err.println(e.getMessage());
-			System.err.println(e.getClass());
-			System.err.println("[ERROR]: Fail accept or add new client to list");
+			logger.fatal(e.toString());
+			logger.fatal("Fail accept or add new client to list");
 		} finally {
 			executor.shutdown();
-			System.out.println("[INFO]: Thread pool closed");
+			logger.info("Thread pool closed");
+		}
+	}
+	
+	public void exit() {
+		if (executor != null) {
+			executor.shutdown();
+			logger.info("Thread pool closed");
+		}
+		
+		if (clients != null) {
+			for (Socket client: clients) {
+				try {
+					client.close();
+				} catch (IOException e) {
+					logger.error(e.toString());
+					logger.error("Close client socket failed: " + client.getRemoteSocketAddress().toString()
+							+ " " + client.getPort());
+				}
+			}
 		}
 	}
 	
@@ -93,10 +123,12 @@ public class ServerApplication<sychronized> {
 	    try {
 	        parser.parseArgument(args);
 	    } catch (Exception e) {
-	    	System.err.println(e.getMessage());
+	    	logger.fatal(e.toString());
+	    	logger.fatal("Parse command line arguments failed");
 	        return false;
 	    }
 	    
+	    logger.info("Parse command line arguments successfully");
 		return true;
 	}
 	
@@ -106,6 +138,9 @@ public class ServerApplication<sychronized> {
 				continue;
 			
 			for (Socket client: clients) {
+				String clientAddr = client.getRemoteSocketAddress().toString();
+				String clientPort = Integer.toString(client.getPort());
+				
 				// Input stream
 				try {
 					DataInputStream input = new DataInputStream(client.getInputStream());
@@ -115,18 +150,17 @@ public class ServerApplication<sychronized> {
 						RequestTask requestTask = new RequestTask(client, request);
 					
 						executor.execute(requestTask);
-						System.out.println("[INFO]: start execute request task");
+						logger.info("Start execute request task from: " + clientAddr + " " + clientPort);
 					}
 				} catch (IOException e) {
-					System.err.println(e.getMessage());
-					System.err.println("[ERROR]: Read input stream from client fail");
+					logger.error(e.toString());
+					logger.error("Read input stream from client fail: " + clientAddr + " " + clientPort);
 				}
 			}
 		}
 	}
 	
 	private class RequestTask implements Runnable {
-		
 		private Socket clientSocket = null;
 		private String request = null;
 		private boolean isClosed = false;
@@ -139,17 +173,19 @@ public class ServerApplication<sychronized> {
 		@Override
 		public void run() {
 			if (clientSocket == null || request == null) {
-				System.err.println("Can not find socket or read stream of client");
+				logger.error("Can not find socket or read stream of client");
 				return;
 			}
+			
+			String clientAddr = clientSocket.getRemoteSocketAddress().toString();
+			String clientPort = Integer.toString(clientSocket.getPort());
 			
 			try {
 				// Output Stream
 			    DataOutputStream output = new DataOutputStream(clientSocket.getOutputStream());
 			    
-			    System.out.println("[INFO]: receive: " + request + " from client: " 
-			    		+ clientSocket.getRemoteSocketAddress().toString() + " "
-			    		+ clientSocket.getPort() + ", at port: " + clientSocket.getLocalPort());
+			    logger.info("Receive: " + request + " from client: " + clientAddr + " " 
+			    		+ clientPort + ", at port: " + clientSocket.getLocalPort());
 			    	
 			    String respond = "NA";
 			    if (!request.equals(EXIT_COMMAND)) {
@@ -157,29 +193,31 @@ public class ServerApplication<sychronized> {
 			    	
 			    	output.writeUTF(respond);
 				    output.flush();
+				    logger.info("Send response to client: " + clientAddr + " " 
+				    		+ clientPort + " successfully");
 			    }
 			    else {
 			    	isClosed = true;
 			    	respond = "Close socket";
+			    	logger.info("Client " + clientAddr + " " + clientPort + " ask to close socket");
 			    }
 			    
 			    String action = getAction(request);
-			    ServerGUIControl.getInstance().addAction(clientSocket.getRemoteSocketAddress().toString()
-		    			, Integer.toString(clientSocket.getPort()), action, respond);
+			    ServerGUIControl.getInstance().addAction(clientAddr, clientPort, action, respond);
 			    
 			} catch (IOException e) {
-				System.err.println(e.getMessage());
-				System.out.println("[ERROR]: client close socket without signal");
+				logger.error(e.toString());
+				logger.error("Client " + clientAddr + " " + clientPort + " close socket without signal");
 				isClosed = true;
 			} catch (Exception e) {
-				System.err.println(e.getMessage());
-				System.out.println("[ERROR]: unexpected error occured");
+				logger.error(e.toString());
+				logger.error("Unexpected error occured while read request and send response from: "
+						+ clientAddr + " " + clientPort);
 				isClosed = true;
 			} finally {
 				if (isClosed) {
 					clients.remove(clientSocket);
-			    	System.out.println("[INFO]: remove client: " + clientSocket.getRemoteSocketAddress().toString() + " "
-				    		+ clientSocket.getPort() + " from list");
+			    	logger.info("Remove client: " + clientAddr + " " + clientPort + " from list");
 			    	
 			    	ServerGUIControl.getInstance().removeConnection(clientSocket.getRemoteSocketAddress().toString(), 
 			    			Integer.toString(clientSocket.getPort()));
@@ -187,8 +225,8 @@ public class ServerApplication<sychronized> {
 			    	try {
 						clientSocket.close();
 					} catch (IOException e) {
-						System.err.println(e.getMessage());
-						System.out.println("[ERROR]: close client socket failed");
+						logger.error(e.toString());
+						logger.error("Close client socket failed: " + clientAddr + " " + clientPort);
 					}
 				}
 			}
@@ -198,6 +236,9 @@ public class ServerApplication<sychronized> {
 			if (request.equals(EXIT_COMMAND))
 				return EXIT_COMMAND;
 			
+			String clientAddr = clientSocket.getRemoteSocketAddress().toString();
+			String clientPort = Integer.toString(clientSocket.getPort());
+			
 			JSONParser jsonParser = new JSONParser();
 			JSONObject requestJSON = new JSONObject();
 			
@@ -205,8 +246,9 @@ public class ServerApplication<sychronized> {
 			try {
 				requestJSON = (JSONObject) jsonParser.parse(request);
 			} catch (ParseException e) {
-				System.err.println(e.getMessage());
-	            System.err.println("[ERROR]: parse json failed from request: " + request);
+				logger.error(e.toString());
+	            logger.error("Parse json failed from request: " + request + ". Client: " + clientAddr 
+	            		+ " " + clientPort);
 	            return "Unable to identify action - " + request;
 			}
 			

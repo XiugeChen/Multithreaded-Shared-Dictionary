@@ -22,15 +22,25 @@ import clientApplication.ClientAppFacade;
 import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.TRAILING;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class QueryPagePanel extends ClientPanel {
+	private static final long serialVersionUID = 1L;
+	
 	private static final int RETURN_WIDTH = 500;
 	private static final int RETURN_HEIGHT = 200;
 	private static final int INPUT_WIDTH = 100;
 	
+	@SuppressWarnings("rawtypes")
 	private JList returnList;
-    private DefaultListModel model;
+    @SuppressWarnings("rawtypes")
+	private DefaultListModel model;
     private JTextField wordText;
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public QueryPagePanel() {
 		super();
 		
@@ -62,6 +72,7 @@ public class QueryPagePanel extends ClientPanel {
 		createLayout(returnList, queryButton, backButton, quitButton);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void createLayout(JList returnList, JComponent... arg) {
         GroupLayout gl = new GroupLayout(this);
         this.setLayout(gl);
@@ -106,6 +117,9 @@ public class QueryPagePanel extends ClientPanel {
     }
 	
 	private class QueryAction extends AbstractAction{
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("unchecked")
 		@Override
 	    public void actionPerformed(ActionEvent e) {
             if (!model.isEmpty())

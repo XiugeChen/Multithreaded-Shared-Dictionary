@@ -4,7 +4,6 @@ import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.TRAILING;
 import static javax.swing.LayoutStyle.ComponentPlacement.RELATED;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -22,16 +21,26 @@ import javax.swing.GroupLayout.SequentialGroup;
 
 import clientApplication.ClientAppFacade;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class RemovePagePanel extends ClientPanel {
+	private static final long serialVersionUID = 1L;
+	
 	private static final int RETURN_WIDTH = 500;
 	private static final int RETURN_HEIGHT = 100;
 	private static final int INPUT_WIDTH = 100;
 	
+	@SuppressWarnings("rawtypes")
 	private JList returnList;
-    private DefaultListModel model;
+    @SuppressWarnings("rawtypes")
+	private DefaultListModel model;
     private JTextField wordText;
     
-    public RemovePagePanel() {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public RemovePagePanel() {
 		super();
 		
 		model = new DefaultListModel();
@@ -62,6 +71,7 @@ public class RemovePagePanel extends ClientPanel {
 		createLayout(returnList, removeButton, backButton, quitButton);
 	}
 	
+	@SuppressWarnings("rawtypes")
 	private void createLayout(JList returnList, JComponent... arg) {
         GroupLayout gl = new GroupLayout(this);
         this.setLayout(gl);
@@ -106,6 +116,9 @@ public class RemovePagePanel extends ClientPanel {
     }
 	
 	private class RemoveAction extends AbstractAction{
+		private static final long serialVersionUID = 1L;
+
+		@SuppressWarnings("unchecked")
 		@Override
 	    public void actionPerformed(ActionEvent e) {
             if (!model.isEmpty())

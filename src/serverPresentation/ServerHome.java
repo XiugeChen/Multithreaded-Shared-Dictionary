@@ -11,18 +11,22 @@ import java.util.Date;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
-import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.GroupLayout.ParallelGroup;
 import javax.swing.GroupLayout.SequentialGroup;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ServerHome extends JPanel {
+	private static final long serialVersionUID = 1L;
+	
 	private ActionTableMode actionTableMode;
 	private ConnectionTableMode connectTableMode;
 	
@@ -33,6 +37,7 @@ public class ServerHome extends JPanel {
 		createButtons();
 	}
 	
+	@SuppressWarnings("unused")
 	private void createButtons() {
 		JButton quitButton = new JButton("Quit");
 		
@@ -148,6 +153,8 @@ public class ServerHome extends JPanel {
 	}
 	
 	private class ConnectionTableMode extends ServerTableMode {		
+		private static final long serialVersionUID = 1L;
+
 		public ConnectionTableMode() {
 			super();
 			this.getColumnNames().add("Client IP");
@@ -157,6 +164,8 @@ public class ServerHome extends JPanel {
 	}
 	
 	private class ActionTableMode extends ServerTableMode {
+		private static final long serialVersionUID = 1L;
+
 		public ActionTableMode() {
 			super();
 			this.getColumnNames().add("Client IP");

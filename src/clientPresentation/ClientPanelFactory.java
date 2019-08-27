@@ -2,6 +2,11 @@ package clientPresentation;
 
 import javax.swing.JPanel;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ClientPanelFactory {
 	private static ClientPanelFactory instance = null;
 	

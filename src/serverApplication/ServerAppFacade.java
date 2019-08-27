@@ -2,6 +2,11 @@ package serverApplication;
 
 import serverPresentation.ServerGUIControl;
 
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ServerAppFacade {
 	private static ServerAppFacade instance = null;
 	private ServerApplication serverApp;
@@ -20,6 +25,11 @@ public class ServerAppFacade {
 	public void runServer() {
 		ServerGUIControl.getInstance().runServerGUI();
 		serverApp.run();
+		System.exit(1);
+	}
+	
+	public void exit() {
+		serverApp.exit();
 		System.exit(1);
 	}
 	

@@ -1,10 +1,11 @@
 package serverPresentation;
 
 import java.awt.EventQueue;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public class ServerGUIControl {
 	private static ServerGUIControl instance = null;
 	private ServerFrame serverFrame;

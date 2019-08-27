@@ -7,8 +7,19 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import org.apache.log4j.Logger;
+
+/**
+ * @author Xiuge Chen (961392)
+ * University of Melbourne
+ * xiugec@student.unimelb.edu.au
+ */
 public abstract class ClientPanel extends JPanel {
+	private static final long serialVersionUID = 1L;
+
 	private static final String BACKGROUND_PATH = "resources/images/background.png";
+	
+	private final static Logger logger = Logger.getLogger(ClientPanel.class);
 	
 	private Image background = null;
 	
@@ -17,9 +28,8 @@ public abstract class ClientPanel extends JPanel {
 			this.background = new ImageIcon(BACKGROUND_PATH).getImage();
 			setSizes(this.background);
 		} catch (Exception e) {
-			System.err.println("[INFO]: Load background in home page failed");
-			System.err.println(e.getMessage());
-			e.printStackTrace();
+			logger.warn(e.toString());
+			logger.warn("[INFO]: Load background in home page failed");
 		}
 	}
 	
