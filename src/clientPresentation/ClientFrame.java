@@ -1,7 +1,9 @@
 package clientPresentation;
 
+import java.awt.Desktop;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.net.URL;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -25,6 +27,8 @@ public class ClientFrame extends JFrame {
 	
 	private static final int WINDOW_WIDTH = 730;
 	private static final int WINDOW_HEIGHT = 390;
+	
+	private static final String HOME_WEBPAGE = "http://www.cloudbus.org/652/LectureSlides.html";
 	
 	private static final String DICT_ICON_PATH = "resources/images/dictionaryIcon.png";
 	private static final String NEW_ICON_PATH = "resources/images/addIcon.png";
@@ -129,6 +133,7 @@ public class ClientFrame extends JFrame {
         
         // add functions to menu items
         exitMenuItem.addActionListener((event) -> ClientAppFacade.getInstance().exit());
+        subjectMenuItem.addActionListener((event) -> openWebpage(HOME_WEBPAGE));
         
         // add items to menu
         fileMenu.add(newMenuItem);
@@ -141,6 +146,15 @@ public class ClientFrame extends JFrame {
 
         setJMenuBar(menuBar);
     }
+	
+	private static void openWebpage(String urlString) {
+	    try {
+	        Desktop.getDesktop().browse(new URL(urlString).toURI());
+	    } catch (Exception e) {
+	    	logger.error(e.toString());
+	        logger.error("Open webpage \"" + urlString + "\" failed");
+	    }
+	}
 }
 
 
