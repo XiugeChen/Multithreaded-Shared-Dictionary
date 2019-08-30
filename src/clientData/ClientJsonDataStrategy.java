@@ -1,7 +1,12 @@
 package clientData;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import clientApplication.ClientApplication;
 
@@ -25,6 +30,8 @@ public class ClientJsonDataStrategy implements ClientDataStrategy {
 		JSONObject json = new JSONObject();
 		
 		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+			json.put("createTime", formatter.format(new Date()));
 			json.put("command", command.toLowerCase());
 			json.put("word", word.toLowerCase());
 			
@@ -59,14 +66,27 @@ public class ClientJsonDataStrategy implements ClientDataStrategy {
 	}
 
 	@Override
-	public String resolveRespond(String data) {
-		if (data == null || data.isEmpty()) {
+	public String resolveRespond(String respond) {
+		if (respond == null || respond.isEmpty()) {
 			logger.error("Recieve empty or null response from server");
 			return "";
 		}
 		
+		String result = "[ERROR]: Can't parse respond from server: " + respond;
+		JSONParser jsonParser = new JSONParser();
+		JSONObject respondJSON = new JSONObject();
+		
+		//Read JSON requst
+		try {
+			respondJSON = (JSONObject) jsonParser.parse(respond);
+			result = (String) respondJSON.get("respond");
+		} catch (ParseException e) {
+			logger.error(e.toString());
+			logger.error("Parse json failed from respond: " + respond);
+		    return result;
+		}
+		
 		logger.info("Resolve server response successfully");
-		return data;
+		return result;
 	}
-	
 }

@@ -28,7 +28,7 @@ public class ClientApplication {
 	
 	public ClientApplication() {
 	}
-	
+
 	public String queryWord(String word) {
 		if (isConnectServer()) {
 			String request = ClientDataStrategyFactory.getInstance().getJsonStrategy()
@@ -116,7 +116,7 @@ public class ClientApplication {
 			else {
 				String response = input.readUTF();
 				logger.info("Recieve reponse from server successfully");
-				return response;
+				return ClientDataStrategyFactory.getInstance().getJsonStrategy().resolveRespond(response);
 			}
 		} catch (Exception e) {
 			logger.error(e.toString());

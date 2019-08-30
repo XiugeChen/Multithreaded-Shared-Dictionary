@@ -1,0 +1,185 @@
+2019-08-28 16:26:33 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-28 16:26:33 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-28 16:26:34 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-28 16:26:34 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-28 16:26:34 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-28 16:26:34 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-28 16:26:39 INFO  ServerApplication:83 - Accept client: /10.12.118.56:51564 51564, and bonded to local port: 1114
+2019-08-28 16:26:39 INFO  ServerApplication:89 - Add client /10.12.118.56:51564 51564 to list
+2019-08-28 16:26:39 INFO  ServerApplication:153 - Start execute request task from: /10.12.118.56:51564 51564
+2019-08-28 16:26:39 INFO  ServerApplication:187 - Receive: {"isValid":"true","word":"name","command":"query"} from client: /10.12.118.56:51564 51564, at port: 1114
+2019-08-28 16:26:39 INFO  ServerJsonDataStrategy:146 - Recieve query request of word: name
+2019-08-28 16:26:39 INFO  ServerApplication:196 - Send response to client: /10.12.118.56:51564 51564 successfully
+2019-08-28 16:26:55 INFO  ServerApplication:153 - Start execute request task from: /10.12.118.56:51564 51564
+2019-08-28 16:26:55 INFO  ServerApplication:187 - Receive: {"meaning":"aaaa","isValid":"true","word":"name","command":"add"} from client: /10.12.118.56:51564 51564, at port: 1114
+2019-08-28 16:26:55 INFO  ServerJsonDataStrategy:196 - Recieve add request of word: name, with meaning: aaaa
+2019-08-28 16:26:55 INFO  ServerJsonDataStrategy:245 - Update dictionary successfully
+2019-08-28 16:26:55 INFO  ServerApplication:196 - Send response to client: /10.12.118.56:51564 51564 successfully
+2019-08-28 16:27:03 INFO  ServerApplication:153 - Start execute request task from: /10.12.118.56:51564 51564
+2019-08-28 16:27:03 INFO  ServerApplication:187 - Receive: {"isValid":"true","word":"name","command":"query"} from client: /10.12.118.56:51564 51564, at port: 1114
+2019-08-28 16:27:03 INFO  ServerJsonDataStrategy:146 - Recieve query request of word: name
+2019-08-28 16:27:03 INFO  ServerApplication:196 - Send response to client: /10.12.118.56:51564 51564 successfully
+2019-08-28 16:27:10 INFO  ServerApplication:153 - Start execute request task from: /10.12.118.56:51564 51564
+2019-08-28 16:27:10 INFO  ServerApplication:187 - Receive: {"isValid":"true","word":"name","command":"remove"} from client: /10.12.118.56:51564 51564, at port: 1114
+2019-08-28 16:27:10 INFO  ServerJsonDataStrategy:165 - Recieve remove request of word: name
+2019-08-28 16:27:10 INFO  ServerJsonDataStrategy:245 - Update dictionary successfully
+2019-08-28 16:27:10 INFO  ServerApplication:196 - Send response to client: /10.12.118.56:51564 51564 successfully
+2019-08-28 16:27:26 INFO  ServerApplication:153 - Start execute request task from: /10.12.118.56:51564 51564
+2019-08-28 16:27:26 INFO  ServerApplication:187 - Receive: EXIT from client: /10.12.118.56:51564 51564, at port: 1114
+2019-08-28 16:27:26 INFO  ServerApplication:202 - Client /10.12.118.56:51564 51564 ask to close socket
+2019-08-28 16:27:26 INFO  ServerApplication:220 - Remove client: /10.12.118.56:51564 51564 from list
+2019-08-30 22:06:26 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:06:26 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:06:27 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:06:27 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:06:27 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:06:27 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:06:36 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:06:36 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:06:36 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:06:37 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:06:37 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:06:38 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:06:38 FATAL ServerApplication:92 - java.net.BindException: Address already in use (Bind failed)
+2019-08-30 22:06:38 FATAL ServerApplication:93 - Fail accept or add new client to list
+2019-08-30 22:06:38 INFO  ServerApplication:96 - Thread pool closed
+2019-08-30 22:06:44 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:06:44 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:06:44 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:06:44 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:06:44 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:06:44 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:06:53 INFO  ServerApplication:83 - Accept client: /127.0.0.1:53411 53411, and bonded to local port: 1114
+2019-08-30 22:06:53 INFO  ServerApplication:89 - Add client /127.0.0.1:53411 53411 to list
+2019-08-30 22:07:03 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53411 53411
+2019-08-30 22:07:03 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:07:03","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:53411 53411, at port: 1114
+2019-08-30 22:07:03 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:07:03 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53411 53411 successfully
+2019-08-30 22:07:08 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53411 53411
+2019-08-30 22:07:08 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:53411 53411, at port: 1114
+2019-08-30 22:07:08 INFO  ServerApplication:202 - Client /127.0.0.1:53411 53411 ask to close socket
+2019-08-30 22:07:08 INFO  ServerApplication:220 - Remove client: /127.0.0.1:53411 53411 from list
+2019-08-30 22:07:46 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:07:46 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:07:47 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:07:47 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:07:47 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:07:47 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:07:53 INFO  ServerApplication:83 - Accept client: /127.0.0.1:53437 53437, and bonded to local port: 1114
+2019-08-30 22:07:53 INFO  ServerApplication:89 - Add client /127.0.0.1:53437 53437 to list
+2019-08-30 22:07:53 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53437 53437
+2019-08-30 22:07:53 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:07:53","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:53437 53437, at port: 1114
+2019-08-30 22:07:53 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:07:53 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53437 53437 successfully
+2019-08-30 22:08:01 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53437 53437
+2019-08-30 22:08:01 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:53437 53437, at port: 1114
+2019-08-30 22:08:01 INFO  ServerApplication:202 - Client /127.0.0.1:53437 53437 ask to close socket
+2019-08-30 22:08:01 INFO  ServerApplication:220 - Remove client: /127.0.0.1:53437 53437 from list
+2019-08-30 22:09:09 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:09:09 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:09:10 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:09:10 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:09:10 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:09:10 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:09:16 INFO  ServerApplication:83 - Accept client: /127.0.0.1:53470 53470, and bonded to local port: 1114
+2019-08-30 22:09:16 INFO  ServerApplication:89 - Add client /127.0.0.1:53470 53470 to list
+2019-08-30 22:09:24 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53470 53470
+2019-08-30 22:09:24 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:09:24","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:53470 53470, at port: 1114
+2019-08-30 22:09:24 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:09:24 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53470 53470 successfully
+2019-08-30 22:09:30 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53470 53470
+2019-08-30 22:09:30 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:53470 53470, at port: 1114
+2019-08-30 22:09:30 INFO  ServerApplication:202 - Client /127.0.0.1:53470 53470 ask to close socket
+2019-08-30 22:09:30 INFO  ServerApplication:220 - Remove client: /127.0.0.1:53470 53470 from list
+2019-08-30 22:11:01 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:11:01 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:11:02 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:11:02 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:11:02 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:11:02 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:11:12 INFO  ServerApplication:83 - Accept client: /127.0.0.1:53510 53510, and bonded to local port: 1114
+2019-08-30 22:11:12 INFO  ServerApplication:89 - Add client /127.0.0.1:53510 53510 to list
+2019-08-30 22:11:20 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53510 53510
+2019-08-30 22:11:20 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:11:20","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:53510 53510, at port: 1114
+2019-08-30 22:11:20 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:11:20 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53510 53510 successfully
+2019-08-30 22:11:28 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53510 53510
+2019-08-30 22:11:28 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:53510 53510, at port: 1114
+2019-08-30 22:11:28 INFO  ServerApplication:202 - Client /127.0.0.1:53510 53510 ask to close socket
+2019-08-30 22:11:28 INFO  ServerApplication:220 - Remove client: /127.0.0.1:53510 53510 from list
+2019-08-30 22:11:51 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:11:51 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:11:51 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:11:51 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:11:51 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:11:51 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:11:56 INFO  ServerApplication:83 - Accept client: /127.0.0.1:53527 53527, and bonded to local port: 1114
+2019-08-30 22:11:56 INFO  ServerApplication:89 - Add client /127.0.0.1:53527 53527 to list
+2019-08-30 22:12:07 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53527 53527
+2019-08-30 22:12:07 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:12:07","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:53527 53527, at port: 1114
+2019-08-30 22:12:07 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:12:07 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53527 53527 successfully
+2019-08-30 22:12:12 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53527 53527
+2019-08-30 22:12:12 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:12:12","isValid":"true","word":"word","command":"remove"} from client: /127.0.0.1:53527 53527, at port: 1114
+2019-08-30 22:12:12 INFO  ServerJsonDataStrategy:172 - Recieve remove request of word: word
+2019-08-30 22:12:12 INFO  ServerJsonDataStrategy:252 - Update dictionary successfully
+2019-08-30 22:12:12 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53527 53527 successfully
+2019-08-30 22:12:18 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53527 53527
+2019-08-30 22:12:18 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:12:18","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:53527 53527, at port: 1114
+2019-08-30 22:12:18 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:12:18 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53527 53527 successfully
+2019-08-30 22:12:58 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53527 53527
+2019-08-30 22:12:58 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:12:58","meaning":"a single distinct meaningful element of speech or writing, used with others (or sometimes alone) to form a sentence and typically shown with a space on either side when written or printed.","isValid":"true","word":"word","command":"add"} from client: /127.0.0.1:53527 53527, at port: 1114
+2019-08-30 22:12:58 INFO  ServerJsonDataStrategy:203 - Recieve add request of word: word, with meaning: a single distinct meaningful element of speech or writing, used with others (or sometimes alone) to form a sentence and typically shown with a space on either side when written or printed.
+2019-08-30 22:12:58 INFO  ServerJsonDataStrategy:252 - Update dictionary successfully
+2019-08-30 22:12:58 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53527 53527 successfully
+2019-08-30 22:13:03 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53527 53527
+2019-08-30 22:13:03 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:13:03","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:53527 53527, at port: 1114
+2019-08-30 22:13:03 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:13:03 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:53527 53527 successfully
+2019-08-30 22:13:24 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:53527 53527
+2019-08-30 22:13:24 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:53527 53527, at port: 1114
+2019-08-30 22:13:24 INFO  ServerApplication:202 - Client /127.0.0.1:53527 53527 ask to close socket
+2019-08-30 22:13:24 INFO  ServerApplication:220 - Remove client: /127.0.0.1:53527 53527 from list
+2019-08-30 22:45:06 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:45:06 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:45:07 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:45:07 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:45:07 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:45:07 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:45:12 INFO  ServerApplication:83 - Accept client: /127.0.0.1:54297 54297, and bonded to local port: 1114
+2019-08-30 22:45:12 INFO  ServerApplication:89 - Add client /127.0.0.1:54297 54297 to list
+2019-08-30 22:45:25 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:54297 54297
+2019-08-30 22:45:25 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:45:25","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:54297 54297, at port: 1114
+2019-08-30 22:45:25 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:45:25 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:54297 54297 successfully
+2019-08-30 22:45:33 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:54297 54297
+2019-08-30 22:45:33 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:54297 54297, at port: 1114
+2019-08-30 22:45:33 INFO  ServerApplication:202 - Client /127.0.0.1:54297 54297 ask to close socket
+2019-08-30 22:45:33 INFO  ServerApplication:220 - Remove client: /127.0.0.1:54297 54297 from list
+2019-08-30 22:48:03 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-08-30 22:48:04 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-08-30 22:48:04 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-08-30 22:48:04 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-08-30 22:48:04 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-08-30 22:48:04 INFO  ServerApplication:75 - Start thread assignment thread
+2019-08-30 22:48:10 INFO  ServerApplication:83 - Accept client: /127.0.0.1:54346 54346, and bonded to local port: 1114
+2019-08-30 22:48:10 INFO  ServerApplication:89 - Add client /127.0.0.1:54346 54346 to list
+2019-08-30 22:48:17 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:54346 54346
+2019-08-30 22:48:17 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:48:17","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:54346 54346, at port: 1114
+2019-08-30 22:48:17 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:48:17 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:54346 54346 successfully
+2019-08-30 22:48:22 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:54346 54346
+2019-08-30 22:48:22 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:54346 54346, at port: 1114
+2019-08-30 22:48:22 INFO  ServerApplication:202 - Client /127.0.0.1:54346 54346 ask to close socket
+2019-08-30 22:48:22 INFO  ServerApplication:220 - Remove client: /127.0.0.1:54346 54346 from list
+2019-08-30 22:48:30 INFO  ServerApplication:83 - Accept client: /127.0.0.1:54360 54360, and bonded to local port: 1114
+2019-08-30 22:48:30 INFO  ServerApplication:89 - Add client /127.0.0.1:54360 54360 to list
+2019-08-30 22:48:37 INFO  ServerApplication:187 - Receive: {"createTime":"30\/08\/2019 22:48:37","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:54360 54360, at port: 1114
+2019-08-30 22:48:37 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-08-30 22:48:37 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:54360 54360
+2019-08-30 22:48:37 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:54360 54360 successfully
+2019-08-30 22:48:43 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:54360 54360
+2019-08-30 22:48:43 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:54360 54360, at port: 1114
+2019-08-30 22:48:43 INFO  ServerApplication:202 - Client /127.0.0.1:54360 54360 ask to close socket
+2019-08-30 22:48:43 INFO  ServerApplication:220 - Remove client: /127.0.0.1:54360 54360 from list

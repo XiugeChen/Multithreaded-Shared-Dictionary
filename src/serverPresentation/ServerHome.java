@@ -132,7 +132,7 @@ public class ServerHome extends JPanel {
 		
 		actionTableMode.addValue(info);
 	}
-	
+
 	public void addConnection(String ip, String port) {
 		ArrayList<String> info = new ArrayList<>();
 		info.add(ip);

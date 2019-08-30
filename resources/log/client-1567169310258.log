@@ -1,0 +1,7 @@
+2019-08-30 22:48:30 INFO  ClientApplication:103 - Parse command line arguments successfully
+2019-08-30 22:48:37 INFO  ClientDataStrategy:64 - Pack user request successfully
+2019-08-30 22:48:37 INFO  ClientApplication:111 - Send request to server successfully
+2019-08-30 22:48:37 INFO  ClientApplication:118 - Recieve reponse from server successfully
+2019-08-30 22:48:37 INFO  ClientDataStrategy:89 - Resolve server response successfully
+2019-08-30 22:48:43 INFO  ClientApplication:111 - Send request to server successfully
+2019-08-30 22:48:43 INFO  ClientAppFacade:56 - User exit client program

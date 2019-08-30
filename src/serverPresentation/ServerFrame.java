@@ -34,7 +34,7 @@ public class ServerFrame extends JFrame {
 	private static final String EXIT_ICON_PATH = "resources/images/exitIcon.png";
 	
 	private final static Logger logger = Logger.getLogger(ServerFrame.class);
-	
+
 	public ServerFrame() {
 		initUI();
 	}

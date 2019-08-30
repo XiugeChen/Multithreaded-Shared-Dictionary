@@ -8,7 +8,7 @@ import java.awt.EventQueue;
  * xiugec@student.unimelb.edu.au
  */
 public class ClientGUIControl {
-	
+
 	private static ClientGUIControl instance = null;
 	private ClientFrame clientFrame;
 	

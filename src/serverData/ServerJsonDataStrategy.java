@@ -29,7 +29,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 	public ServerJsonDataStrategy() {
 		dictData = new JSONObject();
 	}
-	
+
 	@Override
 	public boolean setDataSource(String source) {
 		file = source;
@@ -61,6 +61,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String processRequest(String request) {
 		String respond = "[ERROR]: Invalid request";
@@ -88,7 +89,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		Boolean isValid = Boolean.parseBoolean(requestJSON.get("isValid").toString());
 		
 		if (!isValid) {
-			logger.info("Recieve invalid tag request from user");
+			logger.error("Recieve invalid tag request from user");
 			return respond;
 		}
 		
@@ -107,7 +108,13 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 				respond = "[ERROR]: Unkown request command/type";
 		}
 		
-		return respond;
+		JSONObject respondJSON = new JSONObject();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+		respondJSON.put("createTime", formatter.format(new Date()));
+		respondJSON.put("isValid", "true");
+		respondJSON.put("respond", respond);
+		
+		return respondJSON.toString();
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -117,8 +124,8 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 		try {
 			reader = new FileReader(file);
 		} catch (FileNotFoundException e) {
-			logger.error(e.toString());
-			logger.error("can't find json file: " + file);
+			logger.warn(e.toString());
+			logger.warn("can't find json file: " + file);
             
             try {
             	File newFile = new File(file);
@@ -187,6 +194,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 			}
 		}
 		else {
+			logger.info("Word \"" + word + "\" not exist in the dictionary");
 			return "[INFO]: Can not find word " + word + " on server";
 		}
 	}
@@ -203,7 +211,6 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 			
 			if (pair.get("word").toString().equals(word.toLowerCase())) {
 				wordExist = true;
-				logger.warn("New word \"" + word + "\" already exist in the dictionary");
 				break;
 			}
 		}
@@ -222,6 +229,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 			}
 		}
 		else {
+			logger.info("New word \"" + word + "\" already exist in the dictionary");
 			return "[INFO]: Word " + word + " already exists in the server";
 		}
 	}

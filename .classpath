@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="/Users/xiugechen/Desktop/Unimelb/2019Sem2/COMP90015_DistributedSystem/Project/Project1/resources/libraries/args4j-2.0.21.jar"/>
 	<classpathentry kind="lib" path="/Users/xiugechen/Desktop/Unimelb/2019Sem2/COMP90015_DistributedSystem/Project/Project1/resources/libraries/json-simple-1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/xiugechen/Desktop/Unimelb/2019Sem2/COMP90015_DistributedSystem/Project/Project1/resources/libraries/log4j-1.2.17.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

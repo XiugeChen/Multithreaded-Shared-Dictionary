@@ -2,16 +2,20 @@ package clientPresentation;
 
 import static javax.swing.LayoutStyle.ComponentPlacement.RELATED;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.ParallelGroup;
@@ -43,12 +47,13 @@ public class QueryPagePanel extends ClientPanel {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public QueryPagePanel() {
 		super();
-		
+	
 		model = new DefaultListModel();
 		model.addElement("(Query result will be displayed here)");
 		returnList = new JList(model);
 		wordText = new JTextField(INPUT_WIDTH);
 		
+		returnList.setCellRenderer(new MyCellRenderer());
 		createButtons();
 	}
 	
@@ -130,4 +135,24 @@ public class QueryPagePanel extends ClientPanel {
             model.addElement(result);
 		}
 	}
+	
+	@SuppressWarnings("serial")
+	public class MyCellRenderer extends DefaultListCellRenderer{
+        final JPanel p = new JPanel(new BorderLayout());
+        final JLabel lt = new JLabel();
+        String pre = "<html><body style='width: 400px;'>";
+
+        MyCellRenderer() {
+            p.add(lt, BorderLayout.CENTER);
+        }
+
+        @SuppressWarnings("rawtypes")
+		@Override
+        public Component getListCellRendererComponent(final JList list, final Object value, final int index, final boolean isSelected, final boolean hasFocus){
+            final String text = (String) value;
+            lt.setText(pre + text);
+
+            return p;
+        }
+    }
 }
