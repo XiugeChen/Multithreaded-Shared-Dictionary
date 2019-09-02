@@ -147,7 +147,7 @@ public class ClientFrame extends JFrame {
         setJMenuBar(menuBar);
     }
 	
-	private static void openWebpage(String urlString) {
+	private void openWebpage(String urlString) {
 	    try {
 	        Desktop.getDesktop().browse(new URL(urlString).toURI());
 	    } catch (Exception e) {

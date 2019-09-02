@@ -138,11 +138,11 @@ public class QueryPagePanel extends ClientPanel {
 	
 	@SuppressWarnings("serial")
 	public class MyCellRenderer extends DefaultListCellRenderer{
-        final JPanel p = new JPanel(new BorderLayout());
-        final JLabel lt = new JLabel();
+        private final JPanel p = new JPanel(new BorderLayout());
+        private final JLabel lt = new JLabel();
         String pre = "<html><body style='width: 400px;'>";
 
-        MyCellRenderer() {
+        public MyCellRenderer() {
             p.add(lt, BorderLayout.CENTER);
         }
 

@@ -1,8 +1,0 @@
-2019-08-30 22:07:39 INFO  ClientApplication:103 - Parse command line arguments successfully
-2019-08-30 22:07:39 ERROR ClientApplication:85 - java.net.ConnectException: Connection refused (Connection refused)
-2019-08-30 22:07:39 ERROR ClientApplication:86 - Set up connection with server failed
-2019-08-30 22:07:53 INFO  ClientDataStrategy:64 - Pack user request successfully
-2019-08-30 22:07:53 INFO  ClientApplication:111 - Send request to server successfully
-2019-08-30 22:07:53 INFO  ClientApplication:118 - Recieve reponse from server successfully
-2019-08-30 22:08:01 INFO  ClientApplication:111 - Send request to server successfully
-2019-08-30 22:08:01 INFO  ClientAppFacade:56 - User exit client program

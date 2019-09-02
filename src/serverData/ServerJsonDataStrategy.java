@@ -168,7 +168,7 @@ public class ServerJsonDataStrategy implements ServerDataStrategy {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private  String removeWord(String word) {
+	private String removeWord(String word) {
 		logger.info("Recieve remove request of word: " + word);
 		
 		JSONArray pairs = (JSONArray) dictData.get("data");
