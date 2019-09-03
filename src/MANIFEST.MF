@@ -1,1 +1,1 @@
-Main-Class: runServer
+Main-Class: runClient

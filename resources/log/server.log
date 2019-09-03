@@ -243,3 +243,102 @@
 2019-09-02 10:48:12 INFO  ServerApplication:202 - Client /127.0.0.1:50796 50796 ask to close socket
 2019-09-02 10:48:12 INFO  ServerApplication:220 - Remove client: /127.0.0.1:50796 50796 from list
 2019-09-02 10:48:12 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:50796 50796
+2019-09-03 14:56:40 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-09-03 14:56:40 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-09-03 14:56:41 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-09-03 14:56:41 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-09-03 14:56:41 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-09-03 14:56:41 INFO  ServerApplication:75 - Start thread assignment thread
+2019-09-03 14:57:39 INFO  ServerApplication:83 - Accept client: /127.0.0.1:59639 59639, and bonded to local port: 1114
+2019-09-03 14:57:39 INFO  ServerApplication:89 - Add client /127.0.0.1:59639 59639 to list
+2019-09-03 14:58:14 INFO  ServerApplication:83 - Accept client: /127.0.0.1:59643 59643, and bonded to local port: 1114
+2019-09-03 14:58:14 INFO  ServerApplication:89 - Add client /127.0.0.1:59643 59643 to list
+2019-09-03 14:58:30 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59639 59639
+2019-09-03 14:58:30 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:58:30","isValid":"true","word":"ppp","command":"query"} from client: /127.0.0.1:59639 59639, at port: 1114
+2019-09-03 14:58:30 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: ppp
+2019-09-03 14:58:30 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59639 59639 successfully
+2019-09-03 14:58:35 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59639 59639
+2019-09-03 14:58:35 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:58:35","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:59639 59639, at port: 1114
+2019-09-03 14:58:35 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-09-03 14:58:35 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59639 59639 successfully
+2019-09-03 14:58:44 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59643 59643
+2019-09-03 14:58:44 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:58:44","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:59643 59643, at port: 1114
+2019-09-03 14:58:44 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-09-03 14:58:44 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59643 59643 successfully
+2019-09-03 14:58:55 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59643 59643
+2019-09-03 14:58:55 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:58:55","meaning":"meaning","isValid":"true","word":"word","command":"add"} from client: /127.0.0.1:59643 59643, at port: 1114
+2019-09-03 14:58:55 INFO  ServerJsonDataStrategy:204 - Recieve add request of word: word, with meaning: meaning
+2019-09-03 14:58:55 INFO  ServerJsonDataStrategy:232 - New word "word" already exist in the dictionary
+2019-09-03 14:58:55 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59643 59643 successfully
+2019-09-03 14:59:01 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59643 59643
+2019-09-03 14:59:01 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:59:01","isValid":"true","word":"word","command":"remove"} from client: /127.0.0.1:59643 59643, at port: 1114
+2019-09-03 14:59:01 INFO  ServerJsonDataStrategy:172 - Recieve remove request of word: word
+2019-09-03 14:59:01 INFO  ServerJsonDataStrategy:253 - Update dictionary successfully
+2019-09-03 14:59:01 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59643 59643 successfully
+2019-09-03 14:59:06 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59643 59643
+2019-09-03 14:59:06 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:59:06","isValid":"true","word":"ppp","command":"remove"} from client: /127.0.0.1:59643 59643, at port: 1114
+2019-09-03 14:59:06 INFO  ServerJsonDataStrategy:172 - Recieve remove request of word: ppp
+2019-09-03 14:59:06 INFO  ServerJsonDataStrategy:197 - Word "ppp" not exist in the dictionary
+2019-09-03 14:59:06 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59643 59643 successfully
+2019-09-03 14:59:11 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59639 59639
+2019-09-03 14:59:11 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:59:11","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:59639 59639, at port: 1114
+2019-09-03 14:59:11 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-09-03 14:59:11 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59639 59639 successfully
+2019-09-03 14:59:18 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59639 59639
+2019-09-03 14:59:18 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:59:18","isValid":"true","word":"word","command":"remove"} from client: /127.0.0.1:59639 59639, at port: 1114
+2019-09-03 14:59:18 INFO  ServerJsonDataStrategy:172 - Recieve remove request of word: word
+2019-09-03 14:59:18 INFO  ServerJsonDataStrategy:197 - Word "word" not exist in the dictionary
+2019-09-03 14:59:18 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59639 59639 successfully
+2019-09-03 14:59:26 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59639 59639
+2019-09-03 14:59:26 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:59:26","meaning":"meaning","isValid":"true","word":"word","command":"add"} from client: /127.0.0.1:59639 59639, at port: 1114
+2019-09-03 14:59:26 INFO  ServerJsonDataStrategy:204 - Recieve add request of word: word, with meaning: meaning
+2019-09-03 14:59:26 INFO  ServerJsonDataStrategy:253 - Update dictionary successfully
+2019-09-03 14:59:26 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59639 59639 successfully
+2019-09-03 14:59:33 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59643 59643
+2019-09-03 14:59:33 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:59:33","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:59643 59643, at port: 1114
+2019-09-03 14:59:33 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-09-03 14:59:33 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59643 59643 successfully
+2019-09-03 14:59:39 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59643 59643
+2019-09-03 14:59:39 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 14:59:39","isValid":"true","word":"word","command":"remove"} from client: /127.0.0.1:59643 59643, at port: 1114
+2019-09-03 14:59:39 INFO  ServerJsonDataStrategy:172 - Recieve remove request of word: word
+2019-09-03 14:59:39 INFO  ServerJsonDataStrategy:253 - Update dictionary successfully
+2019-09-03 14:59:39 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59643 59643 successfully
+2019-09-03 14:59:43 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59643 59643
+2019-09-03 14:59:43 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:59643 59643, at port: 1114
+2019-09-03 14:59:43 INFO  ServerApplication:202 - Client /127.0.0.1:59643 59643 ask to close socket
+2019-09-03 14:59:43 INFO  ServerApplication:220 - Remove client: /127.0.0.1:59643 59643 from list
+2019-09-03 14:59:46 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59639 59639
+2019-09-03 14:59:46 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:59639 59639, at port: 1114
+2019-09-03 14:59:46 INFO  ServerApplication:202 - Client /127.0.0.1:59639 59639 ask to close socket
+2019-09-03 14:59:46 INFO  ServerApplication:220 - Remove client: /127.0.0.1:59639 59639 from list
+2019-09-03 14:59:57 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-09-03 14:59:57 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-09-03 14:59:58 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-09-03 14:59:58 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-09-03 14:59:58 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-09-03 14:59:58 INFO  ServerApplication:75 - Start thread assignment thread
+2019-09-03 15:01:15 INFO  ServerApplication:49 - Thread pool with size 4 created
+2019-09-03 15:01:15 INFO  ServerApplication:131 - Parse command line arguments successfully
+2019-09-03 15:01:16 INFO  ServerJsonDataStrategy:39 - File not specified or not in .json format, open default file: resources/data/dictionary.json
+2019-09-03 15:01:16 INFO  ServerJsonDataStrategy:53 - Open json file successfully
+2019-09-03 15:01:16 INFO  ServerApplication:70 - Server start running at port: 1114
+2019-09-03 15:01:16 INFO  ServerApplication:75 - Start thread assignment thread
+2019-09-03 15:01:19 INFO  ServerApplication:83 - Accept client: /127.0.0.1:59703 59703, and bonded to local port: 1114
+2019-09-03 15:01:19 INFO  ServerApplication:89 - Add client /127.0.0.1:59703 59703 to list
+2019-09-03 15:01:20 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59703 59703
+2019-09-03 15:01:20 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 15:01:19","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:59703 59703, at port: 1114
+2019-09-03 15:01:20 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-09-03 15:01:20 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59703 59703 successfully
+2019-09-03 15:01:28 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59703 59703
+2019-09-03 15:01:28 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 15:01:28","meaning":"meaning","isValid":"true","word":"word","command":"add"} from client: /127.0.0.1:59703 59703, at port: 1114
+2019-09-03 15:01:28 INFO  ServerJsonDataStrategy:204 - Recieve add request of word: word, with meaning: meaning
+2019-09-03 15:01:28 INFO  ServerJsonDataStrategy:253 - Update dictionary successfully
+2019-09-03 15:01:28 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59703 59703 successfully
+2019-09-03 15:01:32 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59703 59703
+2019-09-03 15:01:32 INFO  ServerApplication:187 - Receive: {"createTime":"03\/09\/2019 15:01:32","isValid":"true","word":"word","command":"query"} from client: /127.0.0.1:59703 59703, at port: 1114
+2019-09-03 15:01:32 INFO  ServerJsonDataStrategy:153 - Recieve query request of word: word
+2019-09-03 15:01:32 INFO  ServerApplication:196 - Send response to client: /127.0.0.1:59703 59703 successfully
+2019-09-03 15:01:37 INFO  ServerApplication:153 - Start execute request task from: /127.0.0.1:59703 59703
+2019-09-03 15:01:37 INFO  ServerApplication:187 - Receive: EXIT from client: /127.0.0.1:59703 59703, at port: 1114
+2019-09-03 15:01:37 INFO  ServerApplication:202 - Client /127.0.0.1:59703 59703 ask to close socket
+2019-09-03 15:01:37 INFO  ServerApplication:220 - Remove client: /127.0.0.1:59703 59703 from list
