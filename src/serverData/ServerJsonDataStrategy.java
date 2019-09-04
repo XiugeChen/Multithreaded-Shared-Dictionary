@@ -20,7 +20,7 @@ import org.json.simple.parser.ParseException;
  * xiugec@student.unimelb.edu.au
  */
 public class ServerJsonDataStrategy implements ServerDataStrategy {
-	private static final String DEFAULT_DIC_PATH = "resources/data/dictionary.json";
+	private static final String DEFAULT_DIC_PATH = "dictionary.json";
 	private final static Logger logger = Logger.getLogger(ServerJsonDataStrategy.class);
 	
 	private JSONObject dictData = null;

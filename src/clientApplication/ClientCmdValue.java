@@ -17,11 +17,11 @@ public class ClientCmdValue {
 	private static final int SMALLEST_PORT = 1025;
 	private static final int LARGEST_PORT = 65535;
 	
-	@Option(name = "-a", aliases = { "--address" }, required = true,
+	@Option(name = "-a", aliases = { "--address" }, required = false,
             usage = "input server address")
 	private String serverAddr;
 	
-	@Option(name = "-p", aliases = { "--port" }, required = true,
+	@Option(name = "-p", aliases = { "--port" }, required = false,
             usage = "input server port")
 	private String serverPort;
 	
@@ -66,10 +66,16 @@ public class ClientCmdValue {
     }
     
     private boolean isValidAddr() {
+    	if (serverAddr == null) 
+    		return true;
+    	
     	return true;
     }
     
     private boolean isValidPort() {
+    	if (serverPort == null) 
+    		return true;
+    		
     	try {
     		int port = Integer.parseInt(serverPort); 
     	    
@@ -90,10 +96,16 @@ public class ClientCmdValue {
 
     // getters
     public String getServerAddr() {
+    	if (serverAddr == null)
+    		return "localhost";
+    	
         return serverAddr;
     }
     
     public String getServerPort() {
+    	if (serverPort == null)
+    		return "1111";
+    	
     	return serverPort;
     }
 }

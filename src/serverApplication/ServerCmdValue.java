@@ -18,7 +18,7 @@ public class ServerCmdValue {
 	
 	private final static Logger logger = Logger.getLogger(ServerCmdValue.class);
 	
-	@Option(name = "-p", aliases = { "--port" }, required = true,
+	@Option(name = "-p", aliases = { "--port" }, required = false,
             usage = "input server port")
 	private String serverPort;
 	
@@ -63,6 +63,9 @@ public class ServerCmdValue {
     }
     
     private boolean isValidPort() {
+    	if (serverPort == null) 
+    		return true;
+    	
     	try {
     		int port = Integer.parseInt(serverPort); 
     	    
@@ -83,6 +86,9 @@ public class ServerCmdValue {
 
     // getters
     public String getServerPort() {
+    	if (serverPort == null)
+    		return "1111";
+    	
     	return serverPort;
     }
     
